@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyAReSOizLgz4MHQLLtEYJtMx6E6DEOaRgc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>199909464165</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.gradTest1</string>
+	<key>PROJECT_ID</key>
+	<string>pharmagradproj</string>
+	<key>STORAGE_BUCKET</key>
+	<string>pharmagradproj.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:199909464165:ios:72192cdb4f19600b7a8e8c</string>
+	<key>DATABASE_URL</key>
+	<string>https://pharmagradproj-default-rtdb.europe-west1.firebasedatabase.app</string>
+</dict>
+</plist>

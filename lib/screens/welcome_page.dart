@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grad_test_1/classesInsidePages/signInUp.dart';
+import 'package:grad_test_1/classesInsidePages/sign_in_up.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -21,7 +21,7 @@ class WelcomePage extends StatelessWidget {
             child: TextButton(
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (ctx) => SignInForm()));
+                      MaterialPageRoute(builder: (ctx) => const SignInForm()));
                 },
                 child: Text(
                   "Login",
@@ -30,11 +30,12 @@ class WelcomePage extends StatelessWidget {
         SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-                
-                onPressed: () {},
-                child: Text(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (ctx) => const SignUp()));
+                },
+                child: const Text(
                   "SignUp",
-                  
                 )))
       ]),
     );
