@@ -120,24 +120,24 @@ class _SignUpState extends State<SignUp> {
               ),
             ),
             ElevatedButton(
-              onPressed: () async {
-             
-                // Validate returns true if the form is valid, or false otherwise.
-                if (_formKey.currentState!.validate()) {
-                     final message = await AuthService()
-                    .registration(email: _email.text, password: _pass.text);
-
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('signed Up successfully ')),
-                   
-                    
-                  );
-                    Navigator.push(context,
-                      MaterialPageRoute(builder: (ctx) => const MainPage()));
-                }
-              },
-              child: const Text('Sign up '),
-            ),
+                child: const Text('Sign up '),
+                onPressed: () async {
+                  if (_formKey.currentState!.validate()) {
+                    final message = await AuthService().registration(
+                      email: _email.text,
+                      password: _pass.text,
+                    );
+                    if (message!.contains('Success')) {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => const MainPage()));
+                    }
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(message),
+                      ),
+                    );
+                  }
+                }),
           ]),
         ),
       ),
@@ -154,6 +154,8 @@ class SignInForm extends StatefulWidget {
 
 class _SignInFormState extends State<SignInForm> {
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _pass = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -174,6 +176,7 @@ class _SignInFormState extends State<SignInForm> {
             Container(
               margin: const EdgeInsets.symmetric(vertical: 7, horizontal: 20),
               child: TextFormField(
+                controller: _email,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
@@ -195,6 +198,7 @@ class _SignInFormState extends State<SignInForm> {
             Container(
               margin: const EdgeInsets.symmetric(vertical: 7, horizontal: 20),
               child: TextFormField(
+                controller: _pass,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 obscureText: true,
                 decoration: const InputDecoration(
@@ -212,18 +216,26 @@ class _SignInFormState extends State<SignInForm> {
                 },
               ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                // Validate returns true if the form is valid, or false otherwise.
-                if (_formKey.currentState!.validate()) {
-                  // If the form is valid, display a snackbar. In the real world,
-                  // you'd often call a server or save the information in a database.
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Processing Data')),
+             ElevatedButton(
+              onPressed: () async {
+                final message = await AuthService().login(
+                  email: _email.text,
+                  password: _pass.text,
+                );
+                if (message!.contains('Success')) {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => const MainPage(),
+                    ),
                   );
                 }
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(message),
+                  ),
+                );
               },
-              child: const Text('Sign in '),
+              child: const Text('Login'),
             ),
           ]),
         ),
