@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_test_1/authScreen/auth_screen.dart';
-import 'package:grad_test_1/screens/main-page.dart';
+
+import 'package:grad_test_1/authScreen/auth_service.dart';
+import 'package:grad_test_1/mainPage/main_page.dart';
+
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -15,12 +18,31 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController _email = TextEditingController();
   final TextEditingController _pass = TextEditingController();
   final TextEditingController _confirmPass = TextEditingController();
+  bool _obscureText = true;
+  void _toggleVisibility() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
+  @override
+  void initState() {
+    FirebaseAuth.instance
+  .authStateChanges()
+  .listen((User? user) {
+    if (user == null) {
+      print('User is currently signed out!');
+    } else {
+      print('User is signed in!');
+    }
+  });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const BackButton(color: Colors.white),
-        backgroundColor: Colors.deepPurpleAccent,
+        
+        
         title: const Text(
           'SignUp Page',
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
@@ -34,6 +56,7 @@ class _SignUpState extends State<SignUp> {
             Container(
               margin: const EdgeInsets.symmetric(vertical: 7, horizontal: 20),
               child: TextFormField(
+                //name text form field
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
@@ -41,11 +64,11 @@ class _SignUpState extends State<SignUp> {
                     fillColor: Color.fromARGB(40, 124, 77, 255),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(30))),
-                    hintText: 'saif bataineh',
+                    hintText: 'your name',
                     labelText: 'name',
                     prefixIcon: Icon(Icons.person)),
                 validator: (value) {
-                  if (value == null || value.isEmpty || value.length > 4) {
+                  if (value == null || value.isEmpty || value.length < 4) {
                     return 'your name must be 4 charachters at least';
                   }
                   return null;
@@ -55,6 +78,7 @@ class _SignUpState extends State<SignUp> {
             Container(
               margin: const EdgeInsets.symmetric(vertical: 7, horizontal: 20),
               child: TextFormField(
+                //email text form field sign up
                 controller: _email,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 keyboardType: TextInputType.emailAddress,
@@ -77,16 +101,23 @@ class _SignUpState extends State<SignUp> {
             Container(
               margin: const EdgeInsets.symmetric(vertical: 7, horizontal: 20),
               child: TextFormField(
+                // password sign up text form field
                 controller: _pass,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-                obscureText: true,
-                decoration: const InputDecoration(
+                obscureText: _obscureText,
+                decoration: InputDecoration(
                     filled: true,
-                    fillColor: Color.fromARGB(40, 124, 77, 255),
-                    border: OutlineInputBorder(
+                    fillColor: const Color.fromARGB(40, 124, 77, 255),
+                    border: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(30))),
                     labelText: 'password',
-                    prefixIcon: Icon(Icons.password_outlined)),
+                    suffixIcon: //show password toggle
+                        IconButton(
+                            onPressed: _toggleVisibility,
+                            icon: Icon(_obscureText
+                                ? Icons.visibility
+                                : Icons.visibility_off)),
+                    prefixIcon: const Icon(Icons.password_outlined)),
                 validator: (value) {
                   if (value == null || value.isEmpty || value.length < 5) {
                     return 'please enter your password';
@@ -98,16 +129,23 @@ class _SignUpState extends State<SignUp> {
             Container(
               margin: const EdgeInsets.symmetric(vertical: 7, horizontal: 20),
               child: TextFormField(
-                obscureText: true,
+                //confirm password text form field sign up
+                obscureText: !_obscureText,
                 controller: _confirmPass,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                     filled: true,
-                    fillColor: Color.fromARGB(40, 124, 77, 255),
-                    border: OutlineInputBorder(
+                    suffixIcon: //show password toggle
+                        IconButton(
+                            onPressed: _toggleVisibility,
+                            icon: Icon(!_obscureText
+                                ? Icons.visibility
+                                : Icons.visibility_off)),
+                    fillColor: const Color.fromARGB(40, 124, 77, 255),
+                    border: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(30))),
                     labelText: 'confirmed password ',
-                    prefixIcon: Icon(Icons.password)),
+                    prefixIcon: const Icon(Icons.password)),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'please confirm your password';
@@ -129,7 +167,7 @@ class _SignUpState extends State<SignUp> {
                     );
                     if (message!.contains('Success')) {
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => const MainPage()));
+                          builder: (context) =>  MainPage()));
                     }
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
@@ -156,13 +194,20 @@ class _SignInFormState extends State<SignInForm> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _pass = TextEditingController();
+  bool _obscureText = true;
+
+  void _toggleVisibility() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const BackButton(color: Colors.white),
-        backgroundColor: Colors.deepPurpleAccent,
+        
+        
         title: const Text(
           'SignIn Page',
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
@@ -180,6 +225,7 @@ class _SignInFormState extends State<SignInForm> {
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
+                    //sign in email
                     filled: true,
                     fillColor: Color.fromARGB(40, 124, 77, 255),
                     border: OutlineInputBorder(
@@ -198,16 +244,23 @@ class _SignInFormState extends State<SignInForm> {
             Container(
               margin: const EdgeInsets.symmetric(vertical: 7, horizontal: 20),
               child: TextFormField(
+                //sign in password
                 controller: _pass,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-                obscureText: true,
-                decoration: const InputDecoration(
+                obscureText: _obscureText,
+                decoration: InputDecoration(
+                    suffixIcon: //show password toggle
+                        IconButton(
+                            onPressed: _toggleVisibility,
+                            icon: Icon(_obscureText
+                                ? Icons.visibility
+                                : Icons.visibility_off)),
                     filled: true,
-                    fillColor: Color.fromARGB(40, 124, 77, 255),
-                    border: OutlineInputBorder(
+                    fillColor: const Color.fromARGB(40, 124, 77, 255),
+                    border: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(30))),
                     labelText: 'password',
-                    prefixIcon: Icon(Icons.password_outlined)),
+                    prefixIcon: const Icon(Icons.password_outlined)),
                 validator: (value) {
                   if (value == null || value.isEmpty || value.length < 5) {
                     return 'please enter your password';
@@ -216,18 +269,18 @@ class _SignInFormState extends State<SignInForm> {
                 },
               ),
             ),
-             ElevatedButton(
+            ElevatedButton(
               onPressed: () async {
                 final message = await AuthService().login(
                   email: _email.text,
                   password: _pass.text,
                 );
                 if (message!.contains('Success')) {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => const MainPage(),
-                    ),
-                  );
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                        builder: (context) => MainPage(),
+                      ),
+                      (Route<dynamic> route) => false);
                 }
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
