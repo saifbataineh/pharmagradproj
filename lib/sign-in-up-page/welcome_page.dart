@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grad_test_1/classesInsidePages/sign_in_up.dart';
+import 'package:grad_test_1/sign-in-up-page/sign_in_up.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -7,7 +7,7 @@ class WelcomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.deepPurpleAccent,
+          
           title: const Text(
             "PharmaTails",
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),

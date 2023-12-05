@@ -23,21 +23,24 @@ class AuthService {
       return e.toString();
     }
   }
+
   Future<String?> login({
     required String email,
     required String password,
   }) async {
-    
-      try {
+    try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
+
+        
       );
       return 'Success';
-    }
-      
-     catch (e) {
-      return 'please check your email or password';
+    } on FirebaseAuthException catch (e) {
+      return e.code;
+    } catch (e) {
+      return e.toString();
     }
   }
 }
+
