@@ -1,9 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:grad_test_1/authScreen/auth_service.dart';
 import 'package:grad_test_1/mainPage/main_page.dart';
-
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -24,25 +22,11 @@ class _SignUpState extends State<SignUp> {
       _obscureText = !_obscureText;
     });
   }
-  @override
-  void initState() {
-    FirebaseAuth.instance
-  .authStateChanges()
-  .listen((User? user) {
-    if (user == null) {
-      print('User is currently signed out!');
-    } else {
-      print('User is signed in!');
-    }
-  });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        
-        
         title: const Text(
           'SignUp Page',
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
@@ -166,8 +150,9 @@ class _SignUpState extends State<SignUp> {
                       password: _pass.text,
                     );
                     if (message!.contains('Success')) {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) =>  MainPage()));
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(builder: (ctx) => const MainPage()),
+                          (route) => false);
                     }
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
@@ -206,8 +191,6 @@ class _SignInFormState extends State<SignInForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        
-        
         title: const Text(
           'SignIn Page',
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
@@ -278,7 +261,7 @@ class _SignInFormState extends State<SignInForm> {
                 if (message!.contains('Success')) {
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
-                        builder: (context) => MainPage(),
+                        builder: (context) => const MainPage(),
                       ),
                       (Route<dynamic> route) => false);
                 }

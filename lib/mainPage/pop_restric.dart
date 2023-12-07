@@ -1,6 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
-import 'package:grad_test_1/sign-in-up-page/welcome_page.dart';
+
 
 class PopRestrict extends StatefulWidget {
   const PopRestrict({super.key});
@@ -47,30 +47,16 @@ class _PopRestrictState extends State<PopRestrict> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          Padding(
-              padding: EdgeInsets.only(right: 0.5),
-              child: IconButton(
-                  onPressed: () {
-                    FirebaseAuth.instance.signOut();
-                    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx)=>const WelcomePage()), (route) => false);
-                  },
-                  icon: Icon(Icons.logout)))
-        ],
-      ),
-      body: Center(
-        child: PopScope(
-            canPop: false,
-            onPopInvoked: (bool didPop) {
-              if (didPop) {
-                return;
-              }
-              _showBackDialog();
-            },
-            child: Text("hello world")),
-      ),
+    return Center(
+      child: PopScope(
+          canPop: false,
+          onPopInvoked: (bool didPop) {
+            if (didPop) {
+              return;
+            }
+            _showBackDialog();
+          },
+          child: const Text("hello world")),
     );
   }
 }

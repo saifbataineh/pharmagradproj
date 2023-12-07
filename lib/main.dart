@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter auth',
       theme: ThemeData(
-        colorScheme: ColorScheme.dark(),
+        colorScheme: const ColorScheme.dark(),
         
         
           brightness: Brightness.dark,
@@ -35,9 +35,9 @@ class MyApp extends StatelessWidget {
                   backgroundColor: MaterialStatePropertyAll(
                       Color.fromARGB(69, 124, 77, 255)))),
           primaryColor: Colors.white,
-          scaffoldBackgroundColor: Color.fromARGB(255, 51, 51, 51)
+          scaffoldBackgroundColor: const Color.fromARGB(255, 51, 51, 51)
           ),
-      home: FirebaseAuth.instance.currentUser==null? const WelcomePage():MainPage()
+      home: FirebaseAuth.instance.currentUser==null? const WelcomePage():const MainPage()
     );
   }
 }
