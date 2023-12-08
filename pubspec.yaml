@@ -39,7 +39,8 @@ dependencies:
   firebase_auth: ^4.15.0
   firebase_ui_auth: ^1.10.0
   flutter_secure_storage: ^9.0.0
-  flutter_typeahead: ^5.0.1
+  fuzzywuzzy: ^1.1.6
+  
 
 dev_dependencies:
   flutter_test:
