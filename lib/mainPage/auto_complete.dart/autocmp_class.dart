@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-
+import 'package:fuzzywuzzy/fuzzywuzzy.dart';
 class AutoCompleteSearch extends StatelessWidget {
   const AutoCompleteSearch({super.key});
   static const List<String> _fruitOptions = <String>[
@@ -22,14 +21,14 @@ class AutoCompleteSearch extends StatelessWidget {
       children: [
         const Text("enter Fruit name:"),
         Autocomplete<String>(
+          
           optionsBuilder: (TextEditingValue fruitTextEditingValue) {
-            if (fruitTextEditingValue.text == '') {
-              return const Iterable<String>.empty();
-            }
-            return _fruitOptions.where((String option) {
-              return option.contains(fruitTextEditingValue.text.toLowerCase());
-              
-            });
+            final  input = fruitTextEditingValue.text.toLowerCase();
+            final filteredOptions = _fruitOptions
+        .where((option) => ratio(input, option) > 30)
+        .toList(growable: false);
+        filteredOptions.sort((a, b) => ratio(b, input).compareTo(ratio(a, input)));
+    return filteredOptions;
           },
           onSelected: (String value) {
             debugPrint('You just selected $value');
