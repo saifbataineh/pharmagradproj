@@ -20,26 +20,28 @@ class AutoCompleteSearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<TextProvider>(builder: (context, provider, child) {
-      
       final controller = TextEditingController(text: provider.text);
-      FocusNode _focusNode=FocusNode();
+      FocusNode _focusNode = FocusNode();
 
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Text("enter Fruit name:"),
           RawAutocomplete<String>(
-            focusNode: _focusNode,
+              focusNode: _focusNode,
               textEditingController: controller,
               optionsBuilder: (TextEditingValue fruitTextEditingValue) {
+               
                 final input = fruitTextEditingValue.text.toLowerCase();
+
                 final filteredOptions = _fruitOptions
                     .where((option) => ratio(input, option) > 25)
                     .toList(growable: false);
                 filteredOptions
                     .sort((a, b) => ratio(b, input).compareTo(ratio(a, input)));
-
+                  
                 return filteredOptions;
+                
               },
               onSelected: (String value) {
                 debugPrint('You just selected $value');
@@ -51,6 +53,7 @@ class AutoCompleteSearch extends StatelessWidget {
                 VoidCallback onFieldSubmitted,
               ) {
                 return TextFormField(
+                    canRequestFocus: true,
                     controller: textEditingController,
                     focusNode: focusNode,
                     onFieldSubmitted: (String value) {
