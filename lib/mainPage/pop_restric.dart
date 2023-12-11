@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:grad_test_1/mainPage/main_page.dart';
+
 
 
 class PopRestrict extends StatefulWidget {
@@ -57,7 +57,7 @@ class _PopRestrictState extends State<PopRestrict> {
             }
             _showBackDialog();
           },
-          child: SizedBox()),
+          child: const SizedBox()),
     );
   }
 }
