@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
             centerTitle: true,
               color: Color.fromARGB(69, 124, 77, 255),
               iconTheme: IconThemeData(color: Colors.white)),
+          
           textButtonTheme: const TextButtonThemeData(
               style: ButtonStyle(
                   backgroundColor: MaterialStatePropertyAll(
