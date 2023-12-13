@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_test_1/Providers/ListenProvider.dart';
-import 'package:grad_test_1/mainPage/auto_complete.dart/autocmp_class.dart';
-import 'package:grad_test_1/mainPage/pop_restric.dart';
-import 'package:grad_test_1/mainPage/recognitions/voice_recognition.dart';
+import 'package:grad_test_1/ApplicationPages/text_voice_page/auto_complete.dart/autocmp_class.dart';
+
+import 'package:grad_test_1/ApplicationPages/text_voice_page/recognitions/voice_recognition.dart';
 import 'package:grad_test_1/sign-in-up-page/welcome_page.dart';
 import 'package:provider/provider.dart';
 
@@ -30,9 +30,9 @@ class MainPage extends StatelessWidget {
         ),
         body: 
            ChangeNotifierProvider(create: (_)=>TextProvider(),
-             child: Column(
+             child: const Column(
               children: [
-                PopRestrict(),
+                
                 AutoCompleteSearch(),
                 Spacer(),
                 VoiceRecognition(),

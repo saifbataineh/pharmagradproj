@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:grad_test_1/authScreen/auth_service.dart';
-import 'package:grad_test_1/mainPage/main_page.dart';
+import 'package:grad_test_1/sign-in-up-page/authScreen/auth_service.dart';
+import 'package:grad_test_1/ApplicationPages/text_voice_page/text_voice_page.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});

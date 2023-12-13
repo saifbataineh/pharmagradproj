@@ -2,7 +2,6 @@ import 'package:avatar_glow/avatar_glow.dart';
 
 import 'package:flutter/material.dart';
 import 'package:grad_test_1/Providers/ListenProvider.dart';
-import 'package:grad_test_1/mainPage/auto_complete.dart/autocmp_class.dart';
 import 'package:provider/provider.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
@@ -16,7 +15,8 @@ class VoiceRecognition extends StatefulWidget {
 class _VoiceRecognitionState extends State<VoiceRecognition> {
   SpeechToText speechtoTect = SpeechToText();
   var _isListening = false;
-  var text = "hold the button and start speaking";
+  var text = "";
+  var text2 = "hold the button and start speaking";
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class _VoiceRecognitionState extends State<VoiceRecognition> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          text,
+          text2,
           style: const TextStyle(
               fontSize: 24, color: Colors.black, fontWeight: FontWeight.w600),
         ),
@@ -46,12 +46,11 @@ class _VoiceRecognitionState extends State<VoiceRecognition> {
                     speechtoTect.listen(onResult: (result) {
                       final provider =
                           Provider.of<TextProvider>(context, listen: false);
-                           
 
-                             
                       setState(() {
                         text = result.recognizedWords;
                         provider.setText(text);
+                      
                       });
                     });
                   }
@@ -61,6 +60,8 @@ class _VoiceRecognitionState extends State<VoiceRecognition> {
             onTapUp: (details) {
               setState(() {
                 _isListening = false;
+                  text2 =
+                            "* if you don't see the suggetions\n please tap on the text form";
               });
               speechtoTect.stop();
             },

@@ -3,8 +3,8 @@ import 'package:fuzzywuzzy/fuzzywuzzy.dart';
 import 'package:grad_test_1/Providers/ListenProvider.dart';
 import 'package:provider/provider.dart';
 
-class AutoCompleteSearch extends StatelessWidget {
-  AutoCompleteSearch({super.key});
+class AutoCompleteSearch extends StatefulWidget {
+  const AutoCompleteSearch({super.key});
   static const List<String> _fruitOptions = <String>[
     'apple',
     'banana',
@@ -18,30 +18,43 @@ class AutoCompleteSearch extends StatelessWidget {
   ];
 
   @override
+  State<AutoCompleteSearch> createState() => _AutoCompleteSearchState();
+}
+
+class _AutoCompleteSearchState extends State<AutoCompleteSearch> {
+  final controller = TextEditingController();
+  FocusNode focusNode = FocusNode();
+ 
+  @override
+  void initState() {
+    super.initState();
+   
+      
+    }
+  
+
+  @override
   Widget build(BuildContext context) {
     return Consumer<TextProvider>(builder: (context, provider, child) {
-      final controller = TextEditingController(text: provider.text);
-      FocusNode _focusNode = FocusNode();
+      controller.text = provider.text;
 
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Text("enter Fruit name:"),
           RawAutocomplete<String>(
-              focusNode: _focusNode,
+              focusNode: focusNode,
               textEditingController: controller,
               optionsBuilder: (TextEditingValue fruitTextEditingValue) {
-               
                 final input = fruitTextEditingValue.text.toLowerCase();
 
-                final filteredOptions = _fruitOptions
+                final filteredOptions = AutoCompleteSearch._fruitOptions
                     .where((option) => ratio(input, option) > 25)
                     .toList(growable: false);
                 filteredOptions
                     .sort((a, b) => ratio(b, input).compareTo(ratio(a, input)));
-                  
+
                 return filteredOptions;
-                
               },
               onSelected: (String value) {
                 debugPrint('You just selected $value');
@@ -53,6 +66,7 @@ class AutoCompleteSearch extends StatelessWidget {
                 VoidCallback onFieldSubmitted,
               ) {
                 return TextFormField(
+                    autofocus: true,
                     canRequestFocus: true,
                     controller: textEditingController,
                     focusNode: focusNode,
@@ -89,5 +103,8 @@ class AutoCompleteSearch extends StatelessWidget {
         ],
       );
     });
+
   }
+
 }
+
