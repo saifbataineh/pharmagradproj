@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:grad_test_1/ApplicationPages/welcome_page/welcome_page.dart';
 
 import 'package:grad_test_1/sign-in-up-page/authScreen/auth_service.dart';
-import 'package:grad_test_1/ApplicationPages/text_voice_page/text_voice_page.dart';
+
+
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -22,6 +24,7 @@ class _SignUpState extends State<SignUp> {
       _obscureText = !_obscureText;
     });
   }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -151,7 +154,7 @@ class _SignUpState extends State<SignUp> {
                     );
                     if (message!.contains('Success')) {
                       Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(builder: (ctx) => const MainPage()),
+                          MaterialPageRoute(builder: (ctx) => const FeatureSelector()),
                           (route) => false);
                     }
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -261,7 +264,7 @@ class _SignInFormState extends State<SignInForm> {
                 if (message!.contains('Success')) {
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
-                        builder: (context) => const MainPage(),
+                        builder: (context) => const FeatureSelector(),
                       ),
                       (Route<dynamic> route) => false);
                 }

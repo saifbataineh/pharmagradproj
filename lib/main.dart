@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_test_1/ApplicationPages/welcome_page/welcome_page.dart';
 import 'package:grad_test_1/firebase_options.dart';
-import 'package:grad_test_1/ApplicationPages/text_voice_page/text_voice_page.dart';
+
 import 'package:grad_test_1/sign-in-up-page/welcome_page.dart';
 
 void main() async {
