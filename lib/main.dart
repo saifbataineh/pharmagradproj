@@ -20,26 +20,23 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter auth',
-      theme: ThemeData(
-        colorScheme: const ColorScheme.dark(),
-        
-        
-          brightness: Brightness.dark,
-          appBarTheme: const AppBarTheme(
-            centerTitle: true,
-              color: Color.fromARGB(69, 124, 77, 255),
-              iconTheme: IconThemeData(color: Colors.white)),
-          
-          textButtonTheme: const TextButtonThemeData(
-              style: ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(
-                      Color.fromARGB(69, 124, 77, 255)))),
-          primaryColor: Colors.white,
-          scaffoldBackgroundColor: const Color.fromARGB(255, 51, 51, 51)
-          ),
-      home: FirebaseAuth.instance.currentUser==null? const WelcomePage():const FeatureSelector()
-    );
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter auth',
+        theme: ThemeData(
+            colorScheme: const ColorScheme.dark(),
+            brightness: Brightness.dark,
+            appBarTheme: const AppBarTheme(
+                centerTitle: true,
+                color: Color.fromARGB(69, 124, 77, 255),
+                iconTheme: IconThemeData(color: Colors.white)),
+            textButtonTheme: const TextButtonThemeData(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStatePropertyAll(
+                        Color.fromARGB(69, 124, 77, 255)))),
+            primaryColor: Colors.white,
+            scaffoldBackgroundColor: const Color.fromARGB(255, 51, 51, 51)),
+        home: FirebaseAuth.instance.currentUser == null
+            ? const WelcomePage()
+            : const FeatureSelector());
   }
 }
