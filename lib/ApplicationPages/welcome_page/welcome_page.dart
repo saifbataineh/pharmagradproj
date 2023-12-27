@@ -36,7 +36,7 @@ class FeatureSelector extends StatelessWidget {
             borderOnForeground: true,
             child: ListTile(
                 splashColor: Colors.deepOrange,
-                title: const Text(" Search by voice or text"),
+                title: const Text("Search for Drugs via Voice or Text"),
                 leading: const Column(
                   children: [
                     Icon(Icons.text_fields),
