@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
+import 'package:grad_test_1/ApplicationPages/details_screen.dart';
 import 'package:grad_test_1/Providers/listen_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -29,30 +30,37 @@ class _AutoCompleteSearchState extends State<AutoCompleteSearch> {
           : Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("enter Fruit name:"),
+                const Text("enter drug name:"),
                 RawAutocomplete<String>(
                     focusNode: focusNode,
                     textEditingController: controller,
-                    optionsBuilder: (TextEditingValue fruitTextEditingValue) {
-                      final input = fruitTextEditingValue.text.toLowerCase();
-                      final drugsData = provider.map['drugs'] as List<dynamic>;
+                    optionsBuilder: (TextEditingValue drugTextEditingValue) {
+                      final input = drugTextEditingValue.text.toLowerCase();
+                      final drugsData = provider.map['drugs'] ;
 
                       // Filter drugs based on input and extract name and pack
                       final matchingDrugs = drugsData
-                          .where((drug) => drug['name']
-                              .toLowerCase()
-                              .contains(input.toLowerCase()))
-                          .map((drug) =>
-                              {'name': drug['name'], 'pack': drug['pack']})
-                          .toList();
+                          .where((drug) =>
+                              ratio(drug['name'].toLowerCase(),
+                                  input.toLowerCase()) >=
+                              50) // Adjust threshold as needed
+                          .map((drug) => {
+                                'name': drug['name'],
+                                'pack': drug['pack'],
+                                'ratio': ratio(drug['name'].toLowerCase(), input.toLowerCase()),
+                                'generalPrice': drug['generalPrice'],
+                                'hospitalPrice': drug['hospitalPrice'],
+                                'pharmaPrice': drug['pharmaPrice'],
+                                'sci': drug['sci'],
+                                'barCode': drug['barCode']
+                              })
+                          .toList()..sort((a, b) => b['ratio'].compareTo(a['ratio']));
 
                       // Return a list of formatted strings with name and pack
                       return matchingDrugs
-                          .map((drug) => '${drug['name']} - ${drug['pack']}')
+                          .map((drug) =>
+                              '${drug['name']} -${drug['generalPrice']}-${drug['hospitalPrice']}-${drug['pharmaPrice']}- ${drug['pack']} -${drug['sci']} -${drug['barCode']}')
                           .toList();
-                    },
-                    onSelected: (String value) {
-                      debugPrint('You just selected $value');
                     },
                     fieldViewBuilder: (
                       BuildContext context,
@@ -89,11 +97,27 @@ class _AutoCompleteSearchState extends State<AutoCompleteSearch> {
                                             options.elementAt(index);
                                         final parts = drugName.split('-');
                                         final name = parts[0];
-                                        final pack = parts[1];
+                                        final gp = parts[1];
+                                        final hp = parts[2];
+                                        final pp = parts[3];
+                                        final pack = parts[4];
+                                        final sci = parts[5];
+                                        final bc = parts[6];
 
                                         return GestureDetector(
                                             onTap: () {
-                                              onSelected(name);
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                      builder: (ctx) =>
+                                                          DetailsPage(
+                                                            pack: pack,
+                                                            name: name,
+                                                            price1: gp,
+                                                            price2: hp,
+                                                            price3: pp,
+                                                            sci: sci,
+                                                            barcode: bc,
+                                                          )));
                                             },
                                             child: ListTile(
                                               title: Text(name),

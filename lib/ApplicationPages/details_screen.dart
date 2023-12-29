@@ -6,17 +6,17 @@ class DetailsPage extends StatelessWidget {
     this.barcode = "",
     this.name = "",
     this.sci = "",
-    this.Price1 = "have no available price ",
-    this.Price2 = "have no available price ",
-    this.Price3 = "have no available price ",
+    this.price1 = "have no available price ",
+    this.price2 = "have no available price ",
+    this.price3 = "have no available price ",
     this.pack=""
   });
   final String name;
   final String barcode;
   final String sci;
-  final String Price1;
-  final String Price2;
-  final String Price3;
+  final String price1;
+  final String price2;
+  final String price3;
   final String pack;
 
   @override
@@ -35,19 +35,19 @@ class DetailsPage extends StatelessWidget {
               iconColor: Colors.deepPurpleAccent,
               leading: const Icon(Icons.attach_money_outlined),
               title: const Text("Jordanian public price"),
-              subtitle: Text("$Price1 \$"),
+              subtitle: Text("$price1 \$"),
             ),
             ListTile(
               iconColor: Colors.deepPurpleAccent,
               leading: const Icon(Icons.attach_money_outlined),
               title: const Text("Hospital price"),
-              subtitle: Text("$Price2 \$"),
+              subtitle: Text("$price2 \$"),
             ),
             ListTile(
               iconColor: Colors.deepPurpleAccent,
               leading: const Icon(Icons.attach_money_outlined),
               title: const Text("Pharmacist price"),
-              subtitle: Text("$Price3 \$"),
+              subtitle: Text("$price3 \$"),
             ),
             ListTile(
               iconColor: Colors.deepPurpleAccent,
