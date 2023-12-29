@@ -152,11 +152,13 @@ class _OpitcalCharState extends State<OpitcalChar> with WidgetsBindingObserver {
       final file = File(pictureFile.path);
       final inputImage = InputImage.fromFile(file);
       final recognizedText = await _textRecognizer.processImage(inputImage);
+      if (!context.mounted) return;
       await Navigator.push(
           context,
           MaterialPageRoute(
               builder: (context) => ResultScreen(text: recognizedText.text)));
     } catch (e) {
+      if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text("an error occured when scanning the text")));
     }

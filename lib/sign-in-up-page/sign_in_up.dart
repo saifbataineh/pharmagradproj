@@ -3,8 +3,6 @@ import 'package:grad_test_1/ApplicationPages/welcome_page/welcome_page.dart';
 
 import 'package:grad_test_1/sign-in-up-page/authScreen/auth_service.dart';
 
-
-
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
   @override
@@ -24,7 +22,6 @@ class _SignUpState extends State<SignUp> {
       _obscureText = !_obscureText;
     });
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -153,10 +150,13 @@ class _SignUpState extends State<SignUp> {
                       password: _pass.text,
                     );
                     if (message!.contains('Success')) {
+                      if (!context.mounted) return;
                       Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(builder: (ctx) => const FeatureSelector()),
+                          MaterialPageRoute(
+                              builder: (ctx) => const FeatureSelector()),
                           (route) => false);
                     }
+                    if (!context.mounted) return;
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(message),
@@ -262,12 +262,14 @@ class _SignInFormState extends State<SignInForm> {
                   password: _pass.text,
                 );
                 if (message!.contains('Success')) {
+                  if (!context.mounted) return;
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
                         builder: (context) => const FeatureSelector(),
                       ),
                       (Route<dynamic> route) => false);
                 }
+                if (!context.mounted) return;
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(message),

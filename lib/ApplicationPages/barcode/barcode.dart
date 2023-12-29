@@ -48,9 +48,9 @@ class _BarCodePageState extends State<BarCodePage> {
                             barcode: result,
                             name: drug["name"],
                             sci: drug["sci"],
-                            Price1: drug["generalPrice"],
-                            Price2: drug["hospitalPrice"],
-                            Price3: drug["pharmaPrice"],
+                            price1: drug["generalPrice"],
+                            price2: drug["hospitalPrice"],
+                            price3: drug["pharmaPrice"],
                             pack: drug["pack"],
                             
                             ),
