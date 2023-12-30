@@ -13,7 +13,11 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+      create: (context) => TextProvider(),
+      builder: (context, child) {
+        return MyApp();
+      }));
 }
 
 class MyApp extends StatelessWidget {
@@ -37,13 +41,8 @@ class MyApp extends StatelessWidget {
                         Color.fromARGB(69, 124, 77, 255)))),
             primaryColor: Colors.white,
             scaffoldBackgroundColor: const Color.fromARGB(255, 51, 51, 51)),
-        home:ChangeNotifierProvider(
-          create: (context)=> TextProvider(),
-          builder: (context,child){
-            return  FirebaseAuth.instance.currentUser == null
+        home: FirebaseAuth.instance.currentUser == null
             ? const WelcomePage()
-            : const FeatureSelector();}));}}
-          
-        
-      
-  
+            : const FeatureSelector());
+  }
+}

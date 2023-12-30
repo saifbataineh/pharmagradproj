@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:grad_test_1/Providers/listen_provider.dart';
 import 'package:grad_test_1/ApplicationPages/text_voice_page/auto_complete.dart/autocmp_class.dart';
@@ -13,19 +12,13 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-   
-        body: 
-           ChangeNotifierProvider(create: (_)=>TextProvider(),
-             child: const Column(
-              children: [
-                
-                AutoCompleteSearch(),
-                Spacer(),
-                VoiceRecognition(),
-                
-              ],
-                       ),
-           ));
-        }
+      body: const Column(
+        children: [
+          AutoCompleteSearch(),
+          Spacer(),
+          VoiceRecognition(),
+        ],
+      ),
+    );
   }
-
+}

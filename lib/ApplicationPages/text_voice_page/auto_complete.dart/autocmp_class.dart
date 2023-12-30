@@ -36,7 +36,7 @@ class _AutoCompleteSearchState extends State<AutoCompleteSearch> {
                     textEditingController: controller,
                     optionsBuilder: (TextEditingValue drugTextEditingValue) {
                       final input = drugTextEditingValue.text.toLowerCase();
-                      final drugsData = provider.map['drugs'] ;
+                      final drugsData = provider.map['drugs'] as List<dynamic> ;
 
                       // Filter drugs based on input and extract name and pack
                       final matchingDrugs = drugsData
@@ -122,6 +122,7 @@ class _AutoCompleteSearchState extends State<AutoCompleteSearch> {
                                             child: ListTile(
                                               title: Text(name),
                                               subtitle: Text(pack),
+                                              
                                             ));
                                       }))));
                     })
