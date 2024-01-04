@@ -14,6 +14,7 @@ class FeatureSelector extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          title: const Text("Choose a search method"),
           actions: [
             Padding(
                 padding: const EdgeInsets.only(right: 0.5),

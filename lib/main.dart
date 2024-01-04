@@ -16,7 +16,7 @@ void main() async {
   runApp(ChangeNotifierProvider(
       create: (context) => TextProvider(),
       builder: (context, child) {
-        return MyApp();
+        return const MyApp();
       }));
 }
 
