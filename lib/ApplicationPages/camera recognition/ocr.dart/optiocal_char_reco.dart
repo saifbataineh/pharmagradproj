@@ -157,6 +157,7 @@ class _OpitcalCharState extends State<OpitcalChar> with WidgetsBindingObserver {
           context,
           MaterialPageRoute(
               builder: (context) => ResultScreen(text: recognizedText.text)));
+              
     } catch (e) {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
