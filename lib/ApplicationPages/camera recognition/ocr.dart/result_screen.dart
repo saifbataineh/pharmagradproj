@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:grad_test_1/ApplicationPages/details_screen.dart';
 import 'package:grad_test_1/Providers/listen_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:fuzzywuzzy/fuzzywuzzy.dart';
 
 class ResultScreen extends StatelessWidget {
   const ResultScreen({super.key, required this.text});
@@ -15,19 +16,20 @@ class ResultScreen extends StatelessWidget {
         return const Center(
           child: CircularProgressIndicator(
             color: Color.fromARGB(255, 54, 212, 244),
-            
           ),
         );
       }
 
       final drugsData = provider.map['drugs'] as List<dynamic>;
       final matchingDrugs = drugsData.where((drug) {
-        final drugNameLower = drug['name'].toLowerCase();
+        final drugNameLower = drug['name'].toLowerCase(). toString().split(" ").first;
         final textLower = text.toLowerCase();
-        /* print('textLower: $textLower, drugNameLower: $drugNameLower'); */
-        
-        return textLower.startsWith(drugNameLower);
-      }).toList();                          
+
+        return partialRatio(drugNameLower, textLower) == 100;
+      }).toList()
+      ..sort((drug1, drug2) => partialRatio(drug2['name'].toLowerCase(), text.toLowerCase())
+        .compareTo(partialRatio(drug1['name'].toLowerCase(), text.toLowerCase())));
+      
 
       return Scaffold(
         appBar: AppBar(
@@ -62,7 +64,6 @@ class ResultScreen extends StatelessWidget {
               },
               title: Text(drugName),
               subtitle: Text(pack),
-              trailing: Text(sci),
             );
           },
         ),

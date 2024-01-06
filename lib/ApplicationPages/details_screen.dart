@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+  
 
 class DetailsPage extends StatelessWidget {
   const DetailsPage({
@@ -21,6 +22,8 @@ class DetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+  
+
     return Scaffold(
         appBar: AppBar(
           title: Text(name),
@@ -31,6 +34,8 @@ class DetailsPage extends StatelessWidget {
         ),
         body: ListView(
           children: [
+            
+            
             ListTile(
               iconColor: Colors.deepPurpleAccent,
               leading: const Icon(Icons.attach_money_outlined),
