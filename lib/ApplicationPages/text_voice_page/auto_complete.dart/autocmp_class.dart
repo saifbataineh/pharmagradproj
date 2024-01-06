@@ -25,109 +25,113 @@ class _AutoCompleteSearchState extends State<AutoCompleteSearch> {
     context.read<TextProvider>().fetchData;
     return Consumer<TextProvider>(builder: (context, provider, child) {
       controller.text = provider.text;
-      return provider.map.isEmpty
-          ? const CircularProgressIndicator()
-          : Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text("enter drug name:"),
-                RawAutocomplete<String>(
-                    focusNode: focusNode,
-                    textEditingController: controller,
-                    optionsBuilder: (TextEditingValue drugTextEditingValue) {
-                      final input = drugTextEditingValue.text.toLowerCase();
-                      final drugsData = provider.map['drugs'] as List<dynamic> ;
+      return SafeArea(
+          child: provider.map.isEmpty
+              ? const CircularProgressIndicator()
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("enter drug name:"),
+                    RawAutocomplete<String>(
+                        focusNode: focusNode,
+                        textEditingController: controller,
+                        optionsBuilder:
+                            (TextEditingValue drugTextEditingValue) {
+                          final input = drugTextEditingValue.text.toLowerCase();
+                          final drugsData =
+                              provider.map['drugs'] as List<dynamic>;
 
-                      // Filter drugs based on input and extract name and pack
-                      final matchingDrugs = drugsData
-                          .where((drug) =>
-                              ratio(drug['name'].toLowerCase(),
-                                  input.toLowerCase()) >=
-                              50) // Adjust threshold as needed
-                          .map((drug) => {
-                                'name': drug['name'],
-                                'pack': drug['pack'],
-                                'ratio': ratio(drug['name'].toLowerCase(), input.toLowerCase()),
-                                'generalPrice': drug['generalPrice'],
-                                'hospitalPrice': drug['hospitalPrice'],
-                                'pharmaPrice': drug['pharmaPrice'],
-                                'sci': drug['sci'],
-                                'barCode': drug['barCode']
-                              })
-                          .toList()..sort((a, b) => b['ratio'].compareTo(a['ratio']));
+                          // Filter drugs based on input and extract name and pack
+                          final matchingDrugs = drugsData
+                              .where((drug) =>
+                                  ratio(drug['name'].toLowerCase(),
+                                      input.toLowerCase()) >=
+                                  50) // Adjust threshold as needed
+                              .map((drug) => {
+                                    'name': drug['name'],
+                                    'pack': drug['pack'],
+                                    'ratio': ratio(drug['name'].toLowerCase(),
+                                        input.toLowerCase()),
+                                    'generalPrice': drug['generalPrice'],
+                                    'hospitalPrice': drug['hospitalPrice'],
+                                    'pharmaPrice': drug['pharmaPrice'],
+                                    'sci': drug['sci'],
+                                    'barCode': drug['barCode']
+                                  })
+                              .toList()
+                            ..sort((a, b) => b['ratio'].compareTo(a['ratio']));
 
-                      // Return a list of formatted strings with name and pack
-                      return matchingDrugs
-                          .map((drug) =>
-                              '${drug['name']} -${drug['generalPrice']}-${drug['hospitalPrice']}-${drug['pharmaPrice']}- ${drug['pack']} -${drug['sci']} -${drug['barCode']}')
-                          .toList();
-                    },
-                    fieldViewBuilder: (
-                      BuildContext context,
-                      TextEditingController textEditingController,
-                      FocusNode focusNode,
-                      VoidCallback onFieldSubmitted,
-                    ) {
-                      return TextFormField(
-                          autofocus: true,
-                          canRequestFocus: true,
-                          controller: textEditingController,
-                          focusNode: focusNode,
-                          onFieldSubmitted: (String value) {
-                            onFieldSubmitted();
-                          });
-                    },
-                    optionsViewBuilder: (
-                      BuildContext context,
-                      AutocompleteOnSelected<String> onSelected,
-                      options,
-                    ) {
-                      return Align(
-                          alignment: Alignment.topLeft,
-                          child: Material(
-                              elevation: 4.0,
-                              child: SizedBox(
-                                  height: 200.0,
-                                  child: ListView.builder(
-                                      padding: const EdgeInsets.all(8.0),
-                                      itemCount: options.length,
-                                      itemBuilder:
-                                          (BuildContext context, int index) {
-                                        final drugName =
-                                            options.elementAt(index);
-                                        final parts = drugName.split('-');
-                                        final name = parts[0];
-                                        final gp = parts[1];
-                                        final hp = parts[2];
-                                        final pp = parts[3];
-                                        final pack = parts[4];
-                                        final sci = parts[5];
-                                        final bc = parts[6];
+                          // Return a list of formatted strings with name and pack
+                          return matchingDrugs
+                              .map((drug) =>
+                                  '${drug['name']} -${drug['generalPrice']}-${drug['hospitalPrice']}-${drug['pharmaPrice']}- ${drug['pack']} -${drug['sci']} -${drug['barCode']}')
+                              .toList();
+                        },
+                        fieldViewBuilder: (
+                          BuildContext context,
+                          TextEditingController textEditingController,
+                          FocusNode focusNode,
+                          VoidCallback onFieldSubmitted,
+                        ) {
+                          return TextFormField(
+                              autofocus: true,
+                              canRequestFocus: true,
+                              controller: textEditingController,
+                              focusNode: focusNode,
+                              onFieldSubmitted: (String value) {
+                                onFieldSubmitted();
+                              });
+                        },
+                        optionsViewBuilder: (
+                          BuildContext context,
+                          AutocompleteOnSelected<String> onSelected,
+                          options,
+                        ) {
+                          return Align(
+                              alignment: Alignment.topLeft,
+                              child: Material(
+                                  elevation: 4.0,
+                                  child: SizedBox(
+                                      height: 200.0,
+                                      child: ListView.builder(
+                                          padding: const EdgeInsets.all(8.0),
+                                          itemCount: options.length,
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            final drugName =
+                                                options.elementAt(index);
+                                            final parts = drugName.split('-');
+                                            final name = parts[0];
+                                            final gp = parts[1];
+                                            final hp = parts[2];
+                                            final pp = parts[3];
+                                            final pack = parts[4];
+                                            final sci = parts[5];
+                                            final bc = parts[6];
 
-                                        return GestureDetector(
-                                            onTap: () {
-                                              Navigator.of(context).push(
-                                                  MaterialPageRoute(
-                                                      builder: (ctx) =>
-                                                          DetailsPage(
-                                                            pack: pack,
-                                                            name: name,
-                                                            price1: gp,
-                                                            price2: hp,
-                                                            price3: pp,
-                                                            sci: sci,
-                                                            barcode: bc,
-                                                          )));
-                                            },
-                                            child: ListTile(
-                                              title: Text(name),
-                                              subtitle: Text(pack),
-                                              
-                                            ));
-                                      }))));
-                    })
-              ],
-            );
+                                            return GestureDetector(
+                                                onTap: () {
+                                                  Navigator.of(context).push(
+                                                      MaterialPageRoute(
+                                                          builder: (ctx) =>
+                                                              DetailsPage(
+                                                                pack: pack,
+                                                                name: name,
+                                                                price1: gp,
+                                                                price2: hp,
+                                                                price3: pp,
+                                                                sci: sci,
+                                                                barcode: bc,
+                                                              )));
+                                                },
+                                                child: ListTile(
+                                                  title: Text(name),
+                                                  subtitle: Text(pack),
+                                                ));
+                                          }))));
+                        })
+                  ],
+                ));
     });
   }
 }
