@@ -53,7 +53,7 @@ class ResultScreen extends StatelessWidget {
                     builder: (cxt) => DetailsPage(
                       name: drugName,
                       pack: pack,
-                      sci: sci,
+                      sci: sci as String,
                       price1: joPrice,
                       price2: hospitalPrice,
                       price3: phPrice,

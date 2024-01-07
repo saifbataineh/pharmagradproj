@@ -12,7 +12,8 @@ class DetailsPage extends StatelessWidget {
       this.price1 = "have no available price ",
       this.price2 = "have no available price ",
       this.price3 = "have no available price ",
-      this.pack = ""});
+      this.pack = "",
+      });
   final String name;
   final String barcode;
   final String sci;
@@ -20,6 +21,7 @@ class DetailsPage extends StatelessWidget {
   final String price2;
   final String price3;
   final String pack;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,7 @@ class DetailsPage extends StatelessWidget {
       final matchingDrugs = drugsData.where((drug) {
         return drug['sci'] == sci;
       }).toList();
-      print(matchingDrugs);
+      
 
       return Scaffold(
           appBar: AppBar(
@@ -96,17 +98,33 @@ class DetailsPage extends StatelessWidget {
               SizedBox(
                 height: 150,
                 child: ListView.separated(
-                  separatorBuilder:(context,_)=> const SizedBox(width: 20,),
+                    separatorBuilder: (context, _) => const SizedBox(
+                          width: 20,
+                        ),
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     itemCount: matchingDrugs.length,
                     itemBuilder: (context, index) {
                       final drugName = matchingDrugs[index]['name'];
+                      final pack = matchingDrugs[index]['pack'];
+                      final price1 = matchingDrugs[index]['generalPrice'];
+                      final price2 = matchingDrugs[index]['hospitalPrice'];
+                      final price3 = matchingDrugs[index]['pharmaPrice'];
+                      final barcode = matchingDrugs[index]['barCode'];
+                      final sci = matchingDrugs[index]['sci'];
+                      
                       return Container(
                         color: Colors.orange,
                         height: 100,
                         width: 100,
-                        child: Text(drugName),
+                        
+                        child: ElevatedButton(
+                          onPressed:(){
+                            Navigator.of(context).push(
+                            
+                            MaterialPageRoute(builder: (ctx)=>DetailsPage()));
+                          }, 
+                          child:Icon(Icons.abc) ,)
                       );
                     }),
               )
