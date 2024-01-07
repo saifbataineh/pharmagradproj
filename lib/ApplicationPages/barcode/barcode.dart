@@ -48,7 +48,7 @@ class _BarCodePageState extends State<BarCodePage> {
                               builder: (context) => DetailsPage(
                                 barcode: result,
                                 name: drug["name"],
-                                sci: drug["sci"],
+                                sci: drug["sci"] as String,
                                 price1: drug["generalPrice"],
                                 price2: drug["hospitalPrice"],
                                 price3: drug["pharmaPrice"],

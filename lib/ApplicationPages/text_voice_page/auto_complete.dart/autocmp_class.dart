@@ -22,7 +22,6 @@ class _AutoCompleteSearchState extends State<AutoCompleteSearch> {
 
   @override
   Widget build(BuildContext context) {
-    
     context.read<TextProvider>().fetchData;
     return Consumer<TextProvider>(builder: (context, provider, child) {
       controller.text = provider.text;
@@ -44,21 +43,28 @@ class _AutoCompleteSearchState extends State<AutoCompleteSearch> {
 
                           // Filter drugs based on input and extract name and pack
                           final matchingDrugs = drugsData.where((drug) {
-                          final drugNameLower = drug['name'].toLowerCase().toString().split(" ").first;
-                          return ratio(drugNameLower.toLowerCase(), input.toLowerCase()) >=
-                              50;}) // Adjust threshold as needed
-                                  
-                                        
-                          .toList()
-                            ..sort((drug1, drug2) => partialRatio(drug2['name'].toLowerCase(), input.toLowerCase())
-                            .compareTo(partialRatio(drug1['name'].toLowerCase(), input.toLowerCase())));
-                            
-                            return matchingDrugs.map((drug) =>
+                            final drugNameLower = drug['name']
+                                .toLowerCase()
+                                .toString()
+                                .split(" ")
+                                .first;
+                            return ratio(drugNameLower.toLowerCase(),
+                                    input.toLowerCase()) >=
+                                50;
+                          }) // Adjust threshold as needed
+
+                              .toList()
+                            ..sort((drug1, drug2) => partialRatio(
+                                    drug2['name'].toLowerCase(),
+                                    input.toLowerCase())
+                                .compareTo(partialRatio(
+                                    drug1['name'].toLowerCase(),
+                                    input.toLowerCase())));
+
+                          return matchingDrugs
+                              .map((drug) =>
                                   '${drug['name']} -${drug['generalPrice']}-${drug['hospitalPrice']}-${drug['pharmaPrice']}- ${drug['pack']} -${drug['sci']} -${drug['barCode']}')
                               .toList();
-
-
-                             
                         },
                         fieldViewBuilder: (
                           BuildContext context,
@@ -91,17 +97,16 @@ class _AutoCompleteSearchState extends State<AutoCompleteSearch> {
                                           itemCount: options.length,
                                           itemBuilder: (BuildContext context,
                                               int index) {
-                                                final drugName = options.elementAt(index);
-                                                final parts = drugName.split('-');
-                                                final name = parts[0];
-                                                final price1 = parts[1];
-                                                final price2 = parts[2];
-                                                final price3 = parts[3];
-                                                final pack = parts[4];
-                                                final sci = parts[5];
-                                                final barcode = parts[6];
-                                            
-                                            
+                                            final drugName =
+                                                options.elementAt(index);
+                                            final parts = drugName.split('-');
+                                            final name = parts[0];
+                                            final price1 = parts[1];
+                                            final price2 = parts[2];
+                                            final price3 = parts[3];
+                                            final pack = parts[4];
+                                            final sci = parts[5].trim();
+                                            final barcode = parts[6];
 
                                             return GestureDetector(
                                                 onTap: () {
@@ -115,12 +120,14 @@ class _AutoCompleteSearchState extends State<AutoCompleteSearch> {
                                                                 price2: price2,
                                                                 price3: price3,
                                                                 sci: sci,
-                                                                barcode: barcode,
+                                                                barcode:
+                                                                    barcode,
                                                               )));
                                                 },
                                                 child: ListTile(
                                                   title: Text(name),
-                                                  subtitle: Text("Packing: $pack"),
+                                                  subtitle:
+                                                      Text("Packing: $pack"),
                                                 ));
                                           }))));
                         })
