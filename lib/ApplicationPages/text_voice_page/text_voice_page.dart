@@ -11,8 +11,9 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body:  Column(
+    return  Scaffold(
+      appBar: AppBar(),
+      body:  const Column(
         children: [
           AutoCompleteSearch(),
           Spacer(),
