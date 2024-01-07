@@ -22,6 +22,7 @@ class _AutoCompleteSearchState extends State<AutoCompleteSearch> {
 
   @override
   Widget build(BuildContext context) {
+    
     context.read<TextProvider>().fetchData;
     return Consumer<TextProvider>(builder: (context, provider, child) {
       controller.text = provider.text;
@@ -42,30 +43,22 @@ class _AutoCompleteSearchState extends State<AutoCompleteSearch> {
                               provider.map['drugs'] as List<dynamic>;
 
                           // Filter drugs based on input and extract name and pack
-                          final matchingDrugs = drugsData
-                              .where((drug) =>
-                                  ratio(drug['name'].toLowerCase(),
-                                      input.toLowerCase()) >=
-                                  50) // Adjust threshold as needed
-                              .map((drug) => {
-                                    'name': drug['name'],
-                                    'pack': drug['pack'],
-                                    'ratio': ratio(drug['name'].toLowerCase(),
-                                        input.toLowerCase()),
-                                    'generalPrice': drug['generalPrice'],
-                                    'hospitalPrice': drug['hospitalPrice'],
-                                    'pharmaPrice': drug['pharmaPrice'],
-                                    'sci': drug['sci'],
-                                    'barCode': drug['barCode']
-                                  })
-                              .toList()
-                            ..sort((a, b) => b['ratio'].compareTo(a['ratio']));
-
-                          // Return a list of formatted strings with name and pack
-                          return matchingDrugs
-                              .map((drug) =>
+                          final matchingDrugs = drugsData.where((drug) {
+                          final drugNameLower = drug['name'].toLowerCase().toString().split(" ").first;
+                          return ratio(drugNameLower.toLowerCase(), input.toLowerCase()) >=
+                              50;}) // Adjust threshold as needed
+                                  
+                                        
+                          .toList()
+                            ..sort((drug1, drug2) => partialRatio(drug2['name'].toLowerCase(), input.toLowerCase())
+                            .compareTo(partialRatio(drug1['name'].toLowerCase(), input.toLowerCase())));
+                            
+                            return matchingDrugs.map((drug) =>
                                   '${drug['name']} -${drug['generalPrice']}-${drug['hospitalPrice']}-${drug['pharmaPrice']}- ${drug['pack']} -${drug['sci']} -${drug['barCode']}')
                               .toList();
+
+
+                             
                         },
                         fieldViewBuilder: (
                           BuildContext context,
@@ -98,16 +91,17 @@ class _AutoCompleteSearchState extends State<AutoCompleteSearch> {
                                           itemCount: options.length,
                                           itemBuilder: (BuildContext context,
                                               int index) {
-                                            final drugName =
-                                                options.elementAt(index);
-                                            final parts = drugName.split('-');
-                                            final name = parts[0];
-                                            final gp = parts[1];
-                                            final hp = parts[2];
-                                            final pp = parts[3];
-                                            final pack = parts[4];
-                                            final sci = parts[5];
-                                            final bc = parts[6];
+                                                final drugName = options.elementAt(index);
+                                                final parts = drugName.split('-');
+                                                final name = parts[0];
+                                                final price1 = parts[1];
+                                                final price2 = parts[2];
+                                                final price3 = parts[3];
+                                                final pack = parts[4];
+                                                final sci = parts[5];
+                                                final barcode = parts[6];
+                                            
+                                            
 
                                             return GestureDetector(
                                                 onTap: () {
@@ -117,16 +111,16 @@ class _AutoCompleteSearchState extends State<AutoCompleteSearch> {
                                                               DetailsPage(
                                                                 pack: pack,
                                                                 name: name,
-                                                                price1: gp,
-                                                                price2: hp,
-                                                                price3: pp,
+                                                                price1: price1,
+                                                                price2: price2,
+                                                                price3: price3,
                                                                 sci: sci,
-                                                                barcode: bc,
+                                                                barcode: barcode,
                                                               )));
                                                 },
                                                 child: ListTile(
                                                   title: Text(name),
-                                                  subtitle: Text(pack),
+                                                  subtitle: Text("Packing: $pack"),
                                                 ));
                                           }))));
                         })
