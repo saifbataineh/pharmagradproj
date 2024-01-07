@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:grad_test_1/ApplicationPages/details_screen.dart';
+import 'package:grad_test_1/ApplicationPages/resultsPage/details_screen.dart';
 import 'package:grad_test_1/Providers/listen_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
