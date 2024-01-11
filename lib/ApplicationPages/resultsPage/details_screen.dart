@@ -4,16 +4,16 @@ import 'package:grad_test_1/Providers/listen_provider.dart';
 import 'package:provider/provider.dart';
 
 class DetailsPage extends StatelessWidget {
-  const DetailsPage(
-      {super.key,
-      this.barcode = "",
-      this.name = "",
-      this.sci = "",
-      this.price1 = "have no available price ",
-      this.price2 = "have no available price ",
-      this.price3 = "have no available price ",
-      this.pack = "",
-      });
+  const DetailsPage({
+    super.key,
+    this.barcode = "",
+    this.name = "",
+    this.sci = "",
+    this.price1 = "have no available price ",
+    this.price2 = "have no available price ",
+    this.price3 = "have no available price ",
+    this.pack = "",
+  });
   final String name;
   final String barcode;
   final String sci;
@@ -21,7 +21,6 @@ class DetailsPage extends StatelessWidget {
   final String price2;
   final String price3;
   final String pack;
-  
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +37,6 @@ class DetailsPage extends StatelessWidget {
       final matchingDrugs = drugsData.where((drug) {
         return drug['sci'] == sci;
       }).toList();
-      
 
       return Scaffold(
           appBar: AppBar(
@@ -51,6 +49,7 @@ class DetailsPage extends StatelessWidget {
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+               Image.asset('assets/imgs/${name.trim()}.jpg'),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
@@ -112,20 +111,18 @@ class DetailsPage extends StatelessWidget {
                       final price3 = matchingDrugs[index]['pharmaPrice'];
                       final barcode = matchingDrugs[index]['barCode'];
                       final sci = matchingDrugs[index]['sci'];
-                      
+
                       return Container(
-                        color: Colors.orange,
-                        height: 100,
-                        width: 100,
-                        
-                        child: ElevatedButton(
-                          onPressed:(){
-                            Navigator.of(context).push(
-                            
-                            MaterialPageRoute(builder: (ctx)=>DetailsPage()));
-                          }, 
-                          child:Icon(Icons.abc) ,)
-                      );
+                          color: Colors.orange,
+                          height: 100,
+                          width: 100,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (ctx) => DetailsPage()));
+                            },
+                            child: Icon(Icons.abc),
+                          ));
                     }),
               )
             ],
