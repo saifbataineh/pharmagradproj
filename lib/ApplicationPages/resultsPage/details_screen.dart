@@ -49,7 +49,7 @@ class DetailsPage extends StatelessWidget {
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-               Image.asset('assets/imgs/${name.trim()}.jpg'),
+               Image.asset('assets/pngs/${name.trim()}.png'),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
