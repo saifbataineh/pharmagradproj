@@ -49,7 +49,7 @@ class DetailsPage extends StatelessWidget {
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-               Image.asset('assets/imgs/${name.trim()}.jpg'),
+              Image.asset('assets/imgs/${name.trim()}.png'),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
@@ -121,7 +121,7 @@ class DetailsPage extends StatelessWidget {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (ctx) => DetailsPage()));
                             },
-                            child: Icon(Icons.abc),
+                            child: Image.asset('assets/imgs/${drugName}.png'),
                           ));
                     }),
               )
