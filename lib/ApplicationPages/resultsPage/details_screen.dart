@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
+import 'package:grad_test_1/ApplicationPages/camera%20recognition/ocr.dart/result_screen.dart';
 import 'package:grad_test_1/Providers/listen_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -47,9 +48,12 @@ class DetailsPage extends StatelessWidget {
             child: const Icon(Icons.volume_up),
           ),
           body: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.asset('assets/imgs/${name.trim()}.png'),
+              SizedBox(
+                height: 200,
+                width: 200,
+                child: Image.asset('assets/imgs/${name.trim()}.png',fit:BoxFit.fill )),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
@@ -90,12 +94,11 @@ class DetailsPage extends StatelessWidget {
                         title: const Text("barcode"),
                         subtitle: Text(barcode),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
+              Container(
                 height: 150,
+                width: double.infinity,
+                decoration: BoxDecoration(border:Border(top: BorderSide(width: 20)) ,),
+                
                 child: ListView.separated(
                     separatorBuilder: (context, _) => const SizedBox(
                           width: 20,
@@ -111,20 +114,42 @@ class DetailsPage extends StatelessWidget {
                       final price3 = matchingDrugs[index]['pharmaPrice'];
                       final barcode = matchingDrugs[index]['barCode'];
                       final sci = matchingDrugs[index]['sci'];
-
-                      return Container(
-                          color: Colors.orange,
-                          height: 100,
-                          width: 100,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (ctx) => DetailsPage()));
-                            },
-                            child: Image.asset('assets/imgs/${drugName}.png'),
-                          ));
+                
+                      return 
+                      GestureDetector(
+                        onTap: () =>
+                        Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=>
+                        DetailsPage(barcode: barcode,
+                        sci: sci,
+                        name: drugName,
+                        pack: pack,
+                        price1: price1,
+                        price2: price2,
+                        price3: price3,
+                        )
+                        )) ,
+                        child: SizedBox(
+                            
+                            height: 100,
+                            width: 100,
+                            child: Column(
+                              
+                              children:[
+                                Text(drugName),
+                                Spacer(),
+                                SizedBox(
+                                  height: 60,
+                                  width: double.infinity,
+                                  child: Image.asset('assets/imgs/${drugName}.png',fit: BoxFit.fill,))
+                              ] ,
+                            )),
+                      );
                     }),
               )
+                    ],
+                  ),
+                ),
+              ),
             ],
           ));
     });
