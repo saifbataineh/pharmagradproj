@@ -61,7 +61,12 @@ class DetailsPage extends StatelessWidget {
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
+              
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SizedBox(
                   height: 200,
                   width: 200,
                   child: FutureBuilder(
@@ -81,30 +86,27 @@ class DetailsPage extends StatelessWidget {
                           return const CircularProgressIndicator();
                         }
                       })),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
+                      
                       Container(
-                        
-                        decoration:BoxDecoration(borderRadius:BorderRadius.circular(35)) ,
+                        margin: EdgeInsets.all(10),
+                        decoration:BoxDecoration(borderRadius:BorderRadius.circular(35),border: Border.all(width: 5,color: Colors.deepPurpleAccent)) ,
                         child: ListTile(
                           iconColor: Colors.deepPurpleAccent,
                         leading: const Icon(Icons.account_circle),
                         title: const Text("uses"),
-                        subtitle: Text(uses),
+                        subtitle: Text(uses.trim()),
 
 
                         ),
                       ),
                       Container(
                         
-                        decoration:BoxDecoration(borderRadius:BorderRadius.circular(35)) ,
+                        decoration:BoxDecoration(borderRadius:BorderRadius.circular(35),border: Border.all(width: 5,color: Colors.deepPurpleAccent)) ,
                         child: ListTile(
                           iconColor: Colors.deepPurpleAccent,
                         leading: const Icon(Icons.six_k_rounded),
-                        title: const Text("uses"),
-                        subtitle: Text(uses),
+                        title: const Text("Side effects"),
+                        subtitle: Text(sideEffects),
 
 
                         ),

@@ -63,7 +63,7 @@ class _AutoCompleteSearchState extends State<AutoCompleteSearch> {
 
                           return matchingDrugs
                               .map((drug) =>
-                                  '${drug['name']} -${drug['generalPrice']}-${drug['hospitalPrice']}-${drug['pharmaPrice']}- ${drug['pack']} -${drug['sci']} -${drug['barCode']} -${drug['uses']} -${drug['side_effects']}')
+                                  '${drug['name']} --${drug['generalPrice']}--${drug['hospitalPrice']}--${drug['pharmaPrice']}-- ${drug['pack']} --${drug['sci']} --${drug['barCode']} --${drug['uses']} --${drug['side_effects']}')
                               .toList();
                         },
                         fieldViewBuilder: (
@@ -99,7 +99,7 @@ class _AutoCompleteSearchState extends State<AutoCompleteSearch> {
                                               int index) {
                                             final drugName =
                                                 options.elementAt(index);
-                                            final parts = drugName.split('-');
+                                            final parts = drugName.split('--');
                                             final name = parts[0];
                                             final price1 = parts[1];
                                             final price2 = parts[2];
@@ -108,7 +108,7 @@ class _AutoCompleteSearchState extends State<AutoCompleteSearch> {
                                             final sci = parts[5].trim();
                                             final barcode = parts[6];
                                             final uses = parts[7];
-                                            final SideE = parts[8];
+                                            final sidee = parts[8];
 
                                             return GestureDetector(
                                                 onTap: () {
@@ -124,7 +124,7 @@ class _AutoCompleteSearchState extends State<AutoCompleteSearch> {
                                                                 sci: sci,
                                                                 barcode:
                                                                     barcode,
-                                                                    sideEffects: SideE,
+                                                                    sideEffects: sidee,
                                                                     uses: uses,
                                                               )));
                                                 },
