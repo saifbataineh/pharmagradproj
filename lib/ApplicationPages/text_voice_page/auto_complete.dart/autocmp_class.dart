@@ -63,7 +63,7 @@ class _AutoCompleteSearchState extends State<AutoCompleteSearch> {
 
                           return matchingDrugs
                               .map((drug) =>
-                                  '${drug['name']} -${drug['generalPrice']}-${drug['hospitalPrice']}-${drug['pharmaPrice']}- ${drug['pack']} -${drug['sci']} -${drug['barCode']}')
+                                  '${drug['name']} -${drug['generalPrice']}-${drug['hospitalPrice']}-${drug['pharmaPrice']}- ${drug['pack']} -${drug['sci']} -${drug['barCode']} -${drug['uses']} -${drug['side_effects']}')
                               .toList();
                         },
                         fieldViewBuilder: (
@@ -107,6 +107,8 @@ class _AutoCompleteSearchState extends State<AutoCompleteSearch> {
                                             final pack = parts[4];
                                             final sci = parts[5].trim();
                                             final barcode = parts[6];
+                                            final uses = parts[7];
+                                            final SideE = parts[8];
 
                                             return GestureDetector(
                                                 onTap: () {
@@ -122,6 +124,8 @@ class _AutoCompleteSearchState extends State<AutoCompleteSearch> {
                                                                 sci: sci,
                                                                 barcode:
                                                                     barcode,
+                                                                    sideEffects: SideE,
+                                                                    uses: uses,
                                                               )));
                                                 },
                                                 child: ListTile(

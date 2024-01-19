@@ -29,13 +29,15 @@ class _VoiceRecognitionState extends State<VoiceRecognition> {
               fontSize: 24, color: Colors.black, fontWeight: FontWeight.w600),
         ),
         AvatarGlow(
-          endRadius: 75.0,
+         
           animate: _isListening,
           duration: const Duration(milliseconds: 10000),
           glowColor: Colors.green,
           repeat: true,
-          repeatPauseDuration: const Duration(milliseconds: 100),
-          showTwoGlows: true,
+          startDelay: const Duration(milliseconds: 50),
+          glowShape: BoxShape.circle,
+          glowCount: 2,
+          
           child: GestureDetector(
             onTapDown: (details) {
               setState(() async {
