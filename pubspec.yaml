@@ -49,6 +49,7 @@ dependencies:
   simple_barcode_scanner: ^0.0.7
   firebase_storage: ^11.6.0
   cached_network_image: ^3.2.1
+  flutter_tts: ^3.8.5
  
   
 

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:grad_test_1/ApplicationPages/resultsPage/fab.dart';
 import 'package:grad_test_1/Providers/listen_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -54,10 +55,7 @@ class DetailsPage extends StatelessWidget {
           appBar: AppBar(
             title: Text(name),
           ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {},
-            child: const Icon(Icons.volume_up),
-          ),
+          floatingActionButton: DraggableFAB(text: "uses are $uses and the  sideEffects is $sideEffects"),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -88,7 +86,7 @@ class DetailsPage extends StatelessWidget {
                       })),
                       
                       Container(
-                        margin: EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
                         decoration:BoxDecoration(borderRadius:BorderRadius.circular(35),border: Border.all(width: 5,color: Colors.deepPurpleAccent)) ,
                         child: ListTile(
                           iconColor: Colors.deepPurpleAccent,
