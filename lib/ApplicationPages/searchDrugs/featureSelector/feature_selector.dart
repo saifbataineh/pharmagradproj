@@ -1,10 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_test_1/ApplicationPages/barcode/barcode.dart';
-import 'package:grad_test_1/ApplicationPages/camera%20recognition/ocr.dart/optiocal_char_reco.dart';
-import 'package:grad_test_1/ApplicationPages/welcome_page/pop_restric.dart';
-import 'package:grad_test_1/ApplicationPages/text_voice_page/text_voice_page.dart';
-import 'package:grad_test_1/sign-in-up-page/welcome_page.dart';
+import 'package:grad_test_1/ApplicationPages/searchDrugs/barcode/barcode.dart';
+import 'package:grad_test_1/ApplicationPages/searchDrugs/recognitions/recognitions/camera%20recognition/ocr.dart/optiocal_char_reco.dart';
+import 'package:grad_test_1/ApplicationPages/searchDrugs/recognitions/text_voice_page.dart';
+
 
 
 class FeatureSelector extends StatelessWidget {
@@ -15,23 +13,11 @@ class FeatureSelector extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: const Text("Choose a search method"),
-          actions: [
-            Padding(
-                padding: const EdgeInsets.only(right: 0.5),
-                child: IconButton(
-                    onPressed: () {
-                      FirebaseAuth.instance.signOut();
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                              builder: (ctx) => const WelcomePage()),
-                          (route) => false);
-                    },
-                    icon: const Icon(Icons.logout)))
-          ],
+          
         ),
         body:
             Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-          const PopRestrict(),
+          
           Image.asset("assets/welcomepage.png"),
           Card(
             borderOnForeground: true,
@@ -46,14 +32,14 @@ class FeatureSelector extends StatelessWidget {
                 ),
                 onTap: () {
                   Navigator.of(context).push(
-                      MaterialPageRoute(builder: (ctx) => const MainPage()));
+                      MaterialPageRoute(builder: (ctx) => const VoiceTextSearch()));
                 }),
           ),
           Card(
             borderOnForeground: true,
             child: ListTile(
                 title: const Text(" search by name using camera"),
-                leading: const Icon(Icons.camera_alt),
+                leading: const Icon(Icons.add_a_photo),
                 onTap: () {
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (ctx) => const OpitcalChar()));

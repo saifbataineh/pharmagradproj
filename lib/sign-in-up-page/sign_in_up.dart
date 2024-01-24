@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grad_test_1/ApplicationPages/welcome_page/welcome_page.dart';
-
+import 'package:grad_test_1/ApplicationPages/Category/category.dart';
 import 'package:grad_test_1/sign-in-up-page/authScreen/auth_service.dart';
 
 class SignUp extends StatefulWidget {
@@ -153,7 +152,7 @@ class _SignUpState extends State<SignUp> {
                       if (!context.mounted) return;
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
-                              builder: (ctx) => const FeatureSelector()),
+                              builder: (ctx) => CategorySelector()),
                           (route) => false);
                     }
                     if (!context.mounted) return;
@@ -265,7 +264,7 @@ class _SignInFormState extends State<SignInForm> {
                   if (!context.mounted) return;
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
-                        builder: (context) => const FeatureSelector(),
+                        builder: (context) => CategorySelector(),
                       ),
                       (Route<dynamic> route) => false);
                 }

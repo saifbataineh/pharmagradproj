@@ -3,7 +3,7 @@ import 'package:flutter_tts/flutter_tts.dart';
 
 class DraggableFAB extends StatefulWidget {
   const DraggableFAB({super.key, required this.text});
-  final text;
+  final String? text;
   @override
   State<DraggableFAB> createState() => _DraggableFABState();
 }
@@ -18,7 +18,7 @@ class _DraggableFABState extends State<DraggableFAB> {
       await _tts.setLanguage("en-US");
       await _tts.setPitch(1);
       await _tts.setSpeechRate(0.4);
-      await _tts.speak(widget.text);
+      await _tts.speak(widget.text!);
     }
 
     return Stack(

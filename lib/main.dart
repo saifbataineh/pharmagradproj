@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_test_1/ApplicationPages/welcome_page/welcome_page.dart';
+import 'package:grad_test_1/ApplicationPages/Category/category.dart';
 import 'package:grad_test_1/Providers/listen_provider.dart';
 import 'package:grad_test_1/firebase_options.dart';
 
@@ -44,6 +44,6 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor: const Color.fromARGB(255, 51, 51, 51)),
         home: FirebaseAuth.instance.currentUser == null
             ? const WelcomePage()
-            : const FeatureSelector());
+            :  CategorySelector());
   }
 }

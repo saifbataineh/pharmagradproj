@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grad_test_1/ApplicationPages/resultsPage/details_screen.dart';
+import 'package:grad_test_1/ApplicationPages/searchDrugs/resultsPage/details_screen.dart';
 import 'package:grad_test_1/Providers/listen_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
