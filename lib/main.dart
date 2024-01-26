@@ -1,19 +1,36 @@
+import 'dart:isolate';
+import 'dart:ui';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_test_1/ApplicationPages/Category/category.dart';
+
 import 'package:grad_test_1/Providers/listen_provider.dart';
 import 'package:grad_test_1/firebase_options.dart';
 
 import 'package:grad_test_1/sign-in-up-page/welcome_page.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+const String isolateName = 'isolate';
+ReceivePort port = ReceivePort();
+const String countKey = 'count';
+SharedPreferences? prefs;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+  IsolateNameServer.registerPortWithName(
+    port.sendPort,
+    isolateName,
+  );
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  prefs = await SharedPreferences.getInstance();
+  if (!prefs!.containsKey(countKey)) {
+    await prefs!.setInt(countKey, 0);
+    
+  }
   runApp(ChangeNotifierProvider(
       create: (context) => TextProvider(),
       builder: (context, child) {
@@ -44,6 +61,6 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor: const Color.fromARGB(255, 51, 51, 51)),
         home: FirebaseAuth.instance.currentUser == null
             ? const WelcomePage()
-            :  CategorySelector());
+            : CategorySelector());
   }
 }

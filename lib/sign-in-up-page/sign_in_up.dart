@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_test_1/ApplicationPages/Category/category.dart';
 import 'package:grad_test_1/sign-in-up-page/authScreen/auth_service.dart';
@@ -149,6 +150,9 @@ class _SignUpState extends State<SignUp> {
                       password: _pass.text,
                     );
                     if (message!.contains('Success')) {
+                      FirebaseFirestore.instance
+                          .collection("users")
+                          .doc(_email.text).set({});
                       if (!context.mounted) return;
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_test_1/ApplicationPages/Category/pop_restric.dart';
+import 'package:grad_test_1/ApplicationPages/dosage%20reminder/dose.dart';
 import 'package:grad_test_1/ApplicationPages/searchDrugs/featureSelector/feature_selector.dart';
 import 'package:grad_test_1/sign-in-up-page/welcome_page.dart';
 
@@ -24,6 +25,12 @@ class CategorySelector extends StatelessWidget {
     Colors.purpleAccent,
     Colors.deepPurple,
     Colors.deepPurpleAccent
+  ];
+  final List pages = [
+    const FeatureSelector(),
+    const Dose(),
+    const FeatureSelector(),
+     const Dose(),
   ]; // Your list of icons
 
   @override
@@ -31,18 +38,18 @@ class CategorySelector extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         actions: [
-            Padding(
-                padding: const EdgeInsets.only(right: 0.5),
-                child: IconButton(
-                    onPressed: () {
-                      FirebaseAuth.instance.signOut();
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                              builder: (ctx) => const WelcomePage()),
-                          (route) => false);
-                    },
-                    icon: const Icon(Icons.logout)))
-          ],
+          Padding(
+              padding: const EdgeInsets.only(right: 0.5),
+              child: IconButton(
+                  onPressed: () {
+                    FirebaseAuth.instance.signOut();
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                            builder: (ctx) => const WelcomePage()),
+                        (route) => false);
+                  },
+                  icon: const Icon(Icons.logout)))
+        ],
       ),
       body: Column(
         children: [
@@ -73,7 +80,7 @@ class CategorySelector extends StatelessWidget {
                   return InkWell(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const FeatureSelector()));
+                          builder: (context) => pages[index]));
                     },
                     child: Container(
                       margin: const EdgeInsets.all(8),
