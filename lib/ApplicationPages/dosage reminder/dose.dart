@@ -1,8 +1,9 @@
-import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
+import 'dart:async';
+import 'package:alarm/alarm.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
+import 'package:grad_test_1/ApplicationPages/dosage%20reminder/ring.dart';
 
 class Dose extends StatefulWidget {
   const Dose({super.key});
@@ -12,8 +13,7 @@ class Dose extends StatefulWidget {
 }
 
 class _DoseState extends State<Dose> {
-  late final Stream<DocumentSnapshot>?
-      _usersStream; // Change to nullable to reflect potential initialization
+  late final Stream<DocumentSnapshot>? _usersStream;
 
   final _currentUserEmail = FirebaseAuth.instance.currentUser?.email;
   String? drug = "pills";
@@ -21,15 +21,9 @@ class _DoseState extends State<Dose> {
   final TextEditingController _num = TextEditingController();
   final TextEditingController _pack123 = TextEditingController();
   final TextEditingController _name = TextEditingController();
-  @pragma('vm:entry-point')
-  static Future<void> callback() async {
-    await FlutterRingtonePlayer.play(
-      looping: true, // Play repeatedly
-      asAlarm: true,
-      // Use alarm stream (louder)
-      volume: 1.0,
-    );
-  }
+  late List<AlarmSettings> alarms;
+
+  static StreamSubscription<AlarmSettings>? subscription;
 
   @override
   void initState() {
@@ -40,7 +34,23 @@ class _DoseState extends State<Dose> {
           .collection('users')
           .doc(_currentUserEmail)
           .snapshots();
+      alarms = Alarm.getAlarms();
     }
+
+    subscription ??= Alarm.ringStream.stream.listen(
+      (alarmSettings) => navigateToRingScreen(alarmSettings,_currentUserEmail),
+    );
+  }
+
+  Future<void> navigateToRingScreen(
+      AlarmSettings alarmSettings, String? user) async {
+    user = _currentUserEmail;
+    await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => RingScreen(alarmSettings: alarmSettings, userEmail: user),
+        ));
+    Alarm.getAlarms();
   }
 
   @override
@@ -196,6 +206,9 @@ class _DoseState extends State<Dose> {
                       actions: [
                         TextButton(
                             onPressed: () async {
+                              final id =
+                                  DateTime.now().microsecondsSinceEpoch % 10000;
+                              final now = DateTime.now();
                               if (_formKey.currentState!.validate()) {
                                 await FirebaseFirestore.instance
                                     .collection('users')
@@ -205,21 +218,31 @@ class _DoseState extends State<Dose> {
                                     "pack": _pack123.text,
                                     "dailyDose": _num.text,
                                     "type": drug,
+                                    "id": id.toString(),
                                   }
                                 }, SetOptions(merge: true));
                                 if (!context.mounted) return;
                                 Navigator.of(context).pop();
 
-                                await AndroidAlarmManager.oneShot(
-                                  const Duration(
-                                      seconds: 60), // Delay in seconds
-                                  1, // Alarm ID
-                                  callback,
-                                  exact: true,
-                                  wakeup:
-                                      true, // Ensure alarm triggers even in doze mode
-                                );
+                                // Ensure alarm triggers even in doze mode
                               }
+                              Alarm.set(
+                                  alarmSettings: AlarmSettings(
+                                      id: id,
+                                      dateTime: DateTime(
+                                        now.year,
+                                        now.month,
+                                        now.day,
+                                        now.hour,
+                                        now.minute,
+                                        0,
+                                        0,
+                                        0,
+                                      ).add(Duration(minutes: 1)),
+                                      assetAudioPath: "assets/marimba.mp3",
+                                      notificationTitle:
+                                          "enta 3awez esh taba $id",
+                                      notificationBody: "al dawa ya kabten"));
                               // ignore: use_build_context_synchronously
                             },
                             child: const Text("save")),
