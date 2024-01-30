@@ -13,6 +13,9 @@ class Dose extends StatefulWidget {
 }
 
 class _DoseState extends State<Dose> {
+
+
+  
   late final Stream<DocumentSnapshot>? _usersStream;
 
   final _currentUserEmail = FirebaseAuth.instance.currentUser?.email;
@@ -77,6 +80,7 @@ class _DoseState extends State<Dose> {
                                       }
                                       return null;
                                     },
+                                    
                                     controller: _name,
                                     decoration: const InputDecoration(
                                       filled: true,
@@ -135,6 +139,8 @@ class _DoseState extends State<Dose> {
                                           }
                                           return null;
                                         },
+                                        keyboardType: const TextInputType
+                                            .numberWithOptions(),
                                         decoration: const InputDecoration(
                                           contentPadding: EdgeInsets.all(6),
                                           filled: true,

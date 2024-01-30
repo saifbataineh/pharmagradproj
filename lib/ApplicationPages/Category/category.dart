@@ -4,6 +4,8 @@ import 'package:grad_test_1/ApplicationPages/Category/pop_restric.dart';
 import 'package:grad_test_1/ApplicationPages/dosage%20reminder/dose.dart';
 import 'package:grad_test_1/ApplicationPages/searchDrugs/featureSelector/feature_selector.dart';
 import 'package:grad_test_1/sign-in-up-page/welcome_page.dart';
+import 'package:grad_test_1/ApplicationPages/maps/google_maps.dart';
+
 
 class CategorySelector extends StatelessWidget {
   CategorySelector({super.key});
@@ -30,7 +32,7 @@ class CategorySelector extends StatelessWidget {
     const FeatureSelector(),
     const Dose(),
     const FeatureSelector(),
-     const Dose(),
+    const MapPage(),
   ]; // Your list of icons
 
   @override
