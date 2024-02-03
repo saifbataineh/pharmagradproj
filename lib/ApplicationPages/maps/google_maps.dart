@@ -59,9 +59,7 @@ class _MapPageState extends State<MapPage> {
 
    Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Find Nearest Pharmacies"),
-      ),
+      
       body:
       _currentPosition == null || pharmacyMarkers.isEmpty ? 
       const Center(

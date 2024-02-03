@@ -21,13 +21,9 @@ class _RingScreenState extends State<RingScreen> {
         .doc(widget.userEmail)
         .get();
     Map<String, dynamic> data = querySnapshot.data() as Map<String, dynamic>;
-    print("the date is$data");
     data.forEach((key, value) {
-      print("the key is: $key");
-      print("the value is:$value");
       if (value['id'] == widget.alarmSettings.id.toString()) {
         valuewanted = {key: value};
-        print(valuewanted);
       }
     });
   }
@@ -50,6 +46,10 @@ class _RingScreenState extends State<RingScreen> {
               if (int.parse(wantedvalue['pack']) == 0) {
                 Alarm.stop(widget.alarmSettings.id)
                     .then((_) => Navigator.pop(context));
+                await FirebaseFirestore.instance
+                    .collection("users")
+                    .doc(widget.userEmail)
+                    .update({key: FieldValue.delete()});
               } else {
                 var wv = int.parse(wantedvalue['pack']);
 
@@ -65,7 +65,7 @@ class _RingScreenState extends State<RingScreen> {
                         alarmSettings: widget.alarmSettings.copyWith(
                             dateTime: DateTime(now.year, now.month, now.day,
                                     now.hour, now.minute, 0, 0, 0)
-                                .add(const Duration(minutes: 1))))
+                                .add(Duration(minutes: wantedvalue['hours']))))
                     .then((value) => Navigator.pop(context));
               }
             },

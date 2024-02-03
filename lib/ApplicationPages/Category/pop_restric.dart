@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:grad_test_1/ApplicationPages/Category/category.dart';
 
 
 
@@ -17,8 +18,13 @@ class _PopRestrictState extends State<PopRestrict> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Are you sure?'),
-          content: const Text(
-            'Are you sure you want to leave this page?',
+          content:const Text.rich(
+            TextSpan(
+              text: 'you want to leave ',
+              style: TextStyle(color:Colors.grey),
+              children:[
+                TextSpan(text: '  Pharma Tails ?',style: TextStyle(color: Colors.deepPurpleAccent,fontWeight: FontWeight.bold))
+              ] )
           ),
           actions: <Widget>[
             TextButton(
@@ -57,7 +63,7 @@ class _PopRestrictState extends State<PopRestrict> {
             }
             _showBackDialog();
           },
-          child: const SizedBox()),
+          child: CategorySelector()),
     );
   }
 }

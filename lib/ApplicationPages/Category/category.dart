@@ -6,102 +6,76 @@ import 'package:grad_test_1/ApplicationPages/searchDrugs/featureSelector/feature
 import 'package:grad_test_1/sign-in-up-page/welcome_page.dart';
 import 'package:grad_test_1/ApplicationPages/maps/google_maps.dart';
 
-
 class CategorySelector extends StatelessWidget {
   CategorySelector({super.key});
 
   final List<IconData> icons = [
+    Icons.local_pharmacy_outlined,
     Icons.search,
     Icons.access_alarm,
     Icons.border_color,
-    Icons.local_pharmacy_outlined,
   ];
   final List<String> texts = [
+    "Nearest pharmacies",
     "Search for your drug",
     "Set alarm for drug doses",
     "your records",
-    "Nearest pharmacies"
   ];
-  final List<Color> colors = [
-    Colors.purple,
-    Colors.purpleAccent,
-    Colors.deepPurple,
-    Colors.deepPurpleAccent
-  ];
-  final List pages = [
+
+  final List<Widget> pages = [
+    const MapPage(),
     const FeatureSelector(),
     const Dose(),
-    const FeatureSelector(),
-    const MapPage(),
+    const Text("i love the world "),
   ]; // Your list of icons
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          Padding(
-              padding: const EdgeInsets.only(right: 0.5),
-              child: IconButton(
-                  onPressed: () {
-                    FirebaseAuth.instance.signOut();
-                    Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(
-                            builder: (ctx) => const WelcomePage()),
-                        (route) => false);
-                  },
-                  icon: const Icon(Icons.logout)))
-        ],
-      ),
-      body: Column(
-        children: [
-          const PopRestrict(),
-          const Text("Category",
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-          Expanded(
-            child: Container(
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  // Add a border around the entire GridView
-                  color: Colors.grey,
-                  width: 1,
-                ),
-              ),
-              child: GridView.builder(
-                itemCount: icons.length, // Use the length of the icons list
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                ),
-                itemBuilder: (context, index) {
-                  final icon = icons[index];
-                  final textt = texts[index];
-                  final color =
-                      colors[index]; // Retrieve the icon for the current tile
-
-                  return InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => pages[index]));
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.all(8),
-                      color: color,
-                      child: GridTile(
-                        header: Text(
-                          textt,
-                          textAlign: TextAlign.center,
-                        ),
-                        child: Icon(icon),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
+    return DefaultTabController(
+        initialIndex: 1,
+        length: pages.length,
+        child: Scaffold(
+          appBar: AppBar(
+            bottom: TabBar(
+              physics: ClampingScrollPhysics(),
+                tabAlignment: TabAlignment.start,
+                isScrollable: true,
+                tabs: [
+                  Tab(
+                    text: texts[0],
+                    icon: Icon(icons[0]),
+                  ),
+                  Tab(
+                    text: texts[1],
+                    icon: Icon(icons[1]),
+                  ),
+                  Tab(
+                    text: texts[2],
+                    icon: Icon(icons[2]),
+                  ),
+                  Tab(
+                    text: texts[3],
+                    icon: Icon(icons[3]),
+                  ),
+                ]),
+            actions: [
+              Padding(
+                  padding: const EdgeInsets.only(right: 0.5),
+                  child: IconButton(
+                      onPressed: () {
+                        FirebaseAuth.instance.signOut();
+                        Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (ctx) => const WelcomePage()),
+                            (route) => false);
+                      },
+                      icon: const Icon(Icons.logout)))
+            ],
           ),
-        ],
-      ),
-    );
+          body: TabBarView(
+            physics:NeverScrollableScrollPhysics(),
+            children: pages,
+          ),
+        ));
   }
 }

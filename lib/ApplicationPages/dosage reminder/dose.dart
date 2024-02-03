@@ -13,9 +13,6 @@ class Dose extends StatefulWidget {
 }
 
 class _DoseState extends State<Dose> {
-
-
-  
   late final Stream<DocumentSnapshot>? _usersStream;
 
   final _currentUserEmail = FirebaseAuth.instance.currentUser?.email;
@@ -41,7 +38,7 @@ class _DoseState extends State<Dose> {
     }
 
     subscription ??= Alarm.ringStream.stream.listen(
-      (alarmSettings) => navigateToRingScreen(alarmSettings,_currentUserEmail),
+      (alarmSettings) => navigateToRingScreen(alarmSettings, _currentUserEmail),
     );
   }
 
@@ -51,7 +48,8 @@ class _DoseState extends State<Dose> {
     await Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => RingScreen(alarmSettings: alarmSettings, userEmail: user),
+          builder: (context) =>
+              RingScreen(alarmSettings: alarmSettings, userEmail: user),
         ));
     Alarm.getAlarms();
   }
@@ -80,7 +78,6 @@ class _DoseState extends State<Dose> {
                                       }
                                       return null;
                                     },
-                                    
                                     controller: _name,
                                     decoration: const InputDecoration(
                                       filled: true,
@@ -212,6 +209,7 @@ class _DoseState extends State<Dose> {
                       actions: [
                         TextButton(
                             onPressed: () async {
+                              int pillPerDay = 24 ~/ int.parse(_pack123.text);
                               final id =
                                   DateTime.now().microsecondsSinceEpoch % 10000;
                               final now = DateTime.now();
@@ -221,10 +219,11 @@ class _DoseState extends State<Dose> {
                                     .doc(_currentUserEmail)
                                     .set({
                                   _name.text: {
-                                    "pack": _pack123.text,
-                                    "dailyDose": _num.text,
+                                    "pack": _num.text,
+                                    "dailyDose": _pack123.text,
                                     "type": drug,
                                     "id": id.toString(),
+                                    "hours": pillPerDay
                                   }
                                 }, SetOptions(merge: true));
                                 if (!context.mounted) return;
@@ -244,12 +243,12 @@ class _DoseState extends State<Dose> {
                                         0,
                                         0,
                                         0,
-                                      ).add(Duration(minutes: 1)),
+                                      ).add(Duration(minutes: pillPerDay)),
                                       assetAudioPath: "assets/marimba.mp3",
                                       notificationTitle:
-                                          "enta 3awez esh taba $id",
+                                          "time to take your (${_name.text}) drug",
                                       notificationBody: "al dawa ya kabten"));
-                              // ignore: use_build_context_synchronously
+                             
                             },
                             child: const Text("save")),
                         TextButton(
@@ -263,7 +262,7 @@ class _DoseState extends State<Dose> {
                       )));
             },
             label: const Text("Add your drug")),
-        appBar: AppBar(),
+        
         body: StreamBuilder(
             stream: _usersStream,
             builder: (context, snapshot) {

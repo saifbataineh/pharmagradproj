@@ -11,10 +11,7 @@ class FeatureSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("Choose a search method"),
-          
-        ),
+        
         body:
             Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
           
