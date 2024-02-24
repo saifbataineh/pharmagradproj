@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_test_1/ApplicationPages/Category/pop_restric.dart';
 import 'package:grad_test_1/ApplicationPages/dosage%20reminder/dose.dart';
+import 'package:grad_test_1/ApplicationPages/records/records.dart';
 import 'package:grad_test_1/ApplicationPages/searchDrugs/featureSelector/feature_selector.dart';
 import 'package:grad_test_1/sign-in-up-page/welcome_page.dart';
 import 'package:grad_test_1/ApplicationPages/maps/google_maps.dart';
@@ -26,7 +26,7 @@ class CategorySelector extends StatelessWidget {
     const MapPage(),
     const FeatureSelector(),
     const Dose(),
-    const Text("i love the world "),
+    const Records(),
   ]; // Your list of icons
 
   @override
@@ -37,7 +37,7 @@ class CategorySelector extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             bottom: TabBar(
-              physics: ClampingScrollPhysics(),
+              physics: const ClampingScrollPhysics(),
                 tabAlignment: TabAlignment.start,
                 isScrollable: true,
                 tabs: [
@@ -73,7 +73,7 @@ class CategorySelector extends StatelessWidget {
             ],
           ),
           body: TabBarView(
-            physics:NeverScrollableScrollPhysics(),
+            physics:const NeverScrollableScrollPhysics(),
             children: pages,
           ),
         ));

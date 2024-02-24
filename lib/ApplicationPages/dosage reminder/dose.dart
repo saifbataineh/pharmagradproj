@@ -34,7 +34,6 @@ class _DoseState extends State<Dose> {
           .collection('users')
           .doc(_currentUserEmail)
           .snapshots();
-      alarms = Alarm.getAlarms();
     }
 
     subscription ??= Alarm.ringStream.stream.listen(
@@ -51,7 +50,6 @@ class _DoseState extends State<Dose> {
           builder: (context) =>
               RingScreen(alarmSettings: alarmSettings, userEmail: user),
         ));
-    Alarm.getAlarms();
   }
 
   @override
@@ -281,7 +279,7 @@ class _DoseState extends State<Dose> {
 
               return userData.isEmpty
                   ? const Center(
-                      child: Text("hello"),
+                      child: Text("No alarms is set yet"),
                     )
                   : ListView.builder(
                       itemCount: userData.length,
@@ -291,15 +289,13 @@ class _DoseState extends State<Dose> {
                             userData[mapKey] as Map<String, dynamic>;
                         return Card(
                           child: ListTile(
-                            leading: Container(
-                              child: Image.asset(
-                                mapValue['type'] == "syrup"
-                                    ? 'assets/icons/syrup.png'
-                                    : mapValue['type'] == "pills"
-                                        ? 'assets/icons/medicine.png'
-                                        : 'assets/icons/eye-drops.png',
-                                color: Colors.white,
-                              ),
+                            leading: Image.asset(
+                              mapValue['type'] == "syrup"
+                                  ? 'assets/icons/syrup.png'
+                                  : mapValue['type'] == "pills"
+                                      ? 'assets/icons/medicine.png'
+                                      : 'assets/icons/eye-drops.png',
+                              color: Colors.white,
                             ),
                             trailing: Text(
                               "pills left \n${mapValue['pack'].toString()}",

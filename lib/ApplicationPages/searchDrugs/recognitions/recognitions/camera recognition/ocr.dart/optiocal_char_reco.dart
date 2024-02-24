@@ -146,7 +146,6 @@ class _OpitcalCharState extends State<OpitcalChar> with WidgetsBindingObserver {
 
   Future<void> _scanImage() async {
     if (_cameraController == null) return;
-    final navigator = Navigator.of(context);
     try {
       final pictureFile = await _cameraController!.takePicture();
       final file = File(pictureFile.path);

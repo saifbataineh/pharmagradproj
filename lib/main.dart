@@ -2,7 +2,6 @@ import 'package:alarm/alarm.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_test_1/ApplicationPages/Category/category.dart';
 import 'package:grad_test_1/ApplicationPages/Category/pop_restric.dart';
 
 import 'package:grad_test_1/Providers/listen_provider.dart';
