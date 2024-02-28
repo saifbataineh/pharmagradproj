@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:grad_test_1/ApplicationPages/maps/drug_location.dart';
 import 'package:grad_test_1/ApplicationPages/searchDrugs/resultsPage/fab.dart';
 import 'package:grad_test_1/Providers/listen_provider.dart';
 import 'package:provider/provider.dart';
@@ -146,6 +147,15 @@ class DetailsPage extends StatelessWidget {
                           title: const Text("barcode"),
                           subtitle: Text(barcode),
                         ),
+                        Card(
+                          borderOnForeground: true,
+                          child: ListTile(
+                              title: const Text("Where to find Drug"),
+                              onTap: () {
+                                Navigator.of(context).push(
+                                    MaterialPageRoute(builder: (cxt) => LocateDrugPage(searchedDrug: name)));
+                              },
+                              leading: const Icon(Icons.add_location))),
                         Container(
                           height: 150,
                           width: double.infinity,

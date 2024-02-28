@@ -14,8 +14,8 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
-
-
+  
+  GoogleMapController? _mapController;
   static const apiKey = "AIzaSyBVolKgX0PD7cHvAtf8HBWoPoz6Lzyvn2g";
   var url = "";
   List<Marker> pharmacyMarkers = [];
@@ -52,7 +52,11 @@ class _MapPageState extends State<MapPage> {
     checkConnectivity();
     
   }
-
+  @override
+  void dispose() {
+    _mapController?.dispose();
+    super.dispose();
+  }
 
   
   @override
@@ -82,7 +86,10 @@ class _MapPageState extends State<MapPage> {
               icon: homeMarkerIcon, // Use your home marker icon
               infoWindow: const InfoWindow(title: "Your Location"),
             )},//here to display markers,
-        circles: Set.of((_radarCircle != null) ? [_radarCircle!] : []), // Add the radar circle
+        circles: Set.of((_radarCircle != null) ? [_radarCircle!] : []),
+        onMapCreated: (GoogleMapController controller) {
+          _mapController = controller;
+        } // Add the radar circle
         ),
     );
   }
@@ -199,7 +206,8 @@ class _MapPageState extends State<MapPage> {
 //Listening to current location
     location.onLocationChanged.listen((LocationData currentLocation) {
       if(currentLocation.latitude != null && currentLocation.longitude != null) {
-        setState(() {
+        if(mounted) {
+          setState(() {
           _currentPosition = LatLng(currentLocation.latitude!, currentLocation.longitude!);
           _radarCircle = Circle(
             circleId: const CircleId("radar_circle"),
@@ -214,6 +222,7 @@ class _MapPageState extends State<MapPage> {
           
           fetchPharmacyLocations();
         });
+        }
       }
     });
   }
