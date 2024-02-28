@@ -16,10 +16,10 @@ class CategorySelector extends StatelessWidget {
     Icons.border_color,
   ];
   final List<String> texts = [
-    "Nearest pharmacies",
-    "Search for your drug",
-    "Set alarm for drug doses",
-    "your records",
+    "Nearest Pharmacies",
+    "Search For Your Drug",
+    "Set Alarm For Drug Doses",
+    "Your Records",
   ];
 
   final List<Widget> pages = [
