@@ -31,7 +31,7 @@ class _AutoCompleteSearchState extends State<AutoCompleteSearch> {
               : Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("enter drug name:"),
+                    const Text("Enter Drug Name:", style: TextStyle(fontSize: 15),),
                     RawAutocomplete<String>(
                         focusNode: focusNode,
                         textEditingController: controller,

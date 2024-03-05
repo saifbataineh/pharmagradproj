@@ -20,7 +20,7 @@ class FeatureSelector extends StatelessWidget {
             borderOnForeground: true,
             child: ListTile(
                 splashColor: Colors.deepOrange,
-                title: const Text("Search for Drugs via Voice or Text"),
+                title: const Text("Search For Drugs Via Voice or Text"),
                 leading: const Column(
                   children: [
                     Icon(Icons.text_fields),
@@ -35,7 +35,7 @@ class FeatureSelector extends StatelessWidget {
           Card(
             borderOnForeground: true,
             child: ListTile(
-                title: const Text(" search by name using camera"),
+                title: const Text("Search By Name Using Camera"),
                 leading: const Icon(Icons.add_a_photo),
                 onTap: () {
                   Navigator.of(context).push(
@@ -45,7 +45,7 @@ class FeatureSelector extends StatelessWidget {
           Card(
               borderOnForeground: true,
               child: ListTile(
-                  title: const Text(" search by barcode using camera"),
+                  title: const Text("Search By Barcode Using Camera"),
                   onTap: () {
                     Navigator.of(context).push(
                         MaterialPageRoute(builder: (cxt) => const BarCodePage()));
