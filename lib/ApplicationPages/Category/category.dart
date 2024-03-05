@@ -36,6 +36,7 @@ class CategorySelector extends StatelessWidget {
         length: pages.length,
         child: Scaffold(
           appBar: AppBar(
+            title: const Text("PharmaTails"),
             bottom: TabBar(
               physics: const ClampingScrollPhysics(),
                 tabAlignment: TabAlignment.start,

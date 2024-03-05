@@ -271,7 +271,7 @@ class _LocateDrugState extends State<LocateDrugPage> {
           _radarCircle = Circle(
             circleId: const CircleId("radar_circle"),
             center: _currentPosition!,
-            radius: 1500,
+            radius: 850,
             fillColor: const Color.fromRGBO(171, 39, 133, 0.1),
             strokeColor: const Color.fromRGBO(171, 39, 133, 0.5),
             strokeWidth: 1,

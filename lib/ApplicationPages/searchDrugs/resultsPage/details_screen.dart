@@ -54,9 +54,20 @@ class DetailsPage extends StatelessWidget {
       return Scaffold(
           appBar: AppBar(
             title: Text(name),
+            actions: [
+              Padding(
+                          padding: const EdgeInsets.only(right: 0.5),
+                          child: IconButton(onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(builder: (cxt) =>
+                              LocateDrugPage(searchedDrug: name))
+                            );
+                          }, 
+                          icon: const Icon(Icons.location_on))),
+            ],
           ),
           floatingActionButton: DraggableFAB(
-              text: "uses are $uses and the  sideEffects is $sideEffects"),
+              text: "uses are $uses and the side effects are $sideEffects"),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -94,7 +105,7 @@ class DetailsPage extends StatelessWidget {
                           child: ListTile(
                             iconColor: Colors.deepPurpleAccent,
                             leading: const Icon(Icons.account_circle),
-                            title: const Text("uses"),
+                            title: const Text("Uses:"),
                             subtitle: Text(uses.trim()),
                           ),
                         ),
@@ -107,7 +118,7 @@ class DetailsPage extends StatelessWidget {
                           child: ListTile(
                             iconColor: Colors.deepPurpleAccent,
                             leading: const Icon(Icons.six_k_rounded),
-                            title: const Text("Side effects"),
+                            title: const Text("Side Effects:"),
                             subtitle: Text(sideEffects),
                           ),
                         ),
@@ -147,15 +158,7 @@ class DetailsPage extends StatelessWidget {
                           title: const Text("barcode"),
                           subtitle: Text(barcode),
                         ),
-                        Card(
-                          borderOnForeground: true,
-                          child: ListTile(
-                              title: const Text("Where to find Drug"),
-                              onTap: () {
-                                Navigator.of(context).push(
-                                    MaterialPageRoute(builder: (cxt) => LocateDrugPage(searchedDrug: name)));
-                              },
-                              leading: const Icon(Icons.add_location))),
+
                         Container(
                           height: 150,
                           width: double.infinity,

@@ -19,7 +19,7 @@ class _MapPageState extends State<MapPage> {
   static const apiKey = "AIzaSyBVolKgX0PD7cHvAtf8HBWoPoz6Lzyvn2g";
   var url = "";
   List<Marker> pharmacyMarkers = [];
-
+  bool _pharmacyLocationsFetched = false;
   Location location =  Location();
   LatLng? _currentPosition;
   Circle? _radarCircle;
@@ -204,10 +204,10 @@ class _MapPageState extends State<MapPage> {
       }
     }
 //Listening to current location
-    location.onLocationChanged.listen((LocationData currentLocation) {
-      if(currentLocation.latitude != null && currentLocation.longitude != null) {
-        if(mounted) {
-          setState(() {
+  location.onLocationChanged.listen((LocationData currentLocation) {
+    if(currentLocation.latitude != null && currentLocation.longitude != null) {
+      if(mounted) {
+        setState(() {
           _currentPosition = LatLng(currentLocation.latitude!, currentLocation.longitude!);
           _radarCircle = Circle(
             circleId: const CircleId("radar_circle"),
@@ -217,13 +217,20 @@ class _MapPageState extends State<MapPage> {
             strokeColor: const Color.fromRGBO(171, 39, 133, 0.5),
             strokeWidth: 1,
           );
-          url =
-          "https://maps.googleapis.com/maps/api/place/textsearch/json?location=${_currentPosition!.latitude},${_currentPosition!.longitude}&query=pharmacies%20and%20drug%20store&radius=300&type=pharmacy&key=$apiKey";
-          
-          fetchPharmacyLocations();
+
+          // Check if pharmacy locations have already been fetched
+          if (!_pharmacyLocationsFetched) {
+            _pharmacyLocationsFetched = true; // Set flag to prevent further fetching
+            url = "https://maps.googleapis.com/maps/api/place/textsearch/json?location=${_currentPosition!.latitude},${_currentPosition!.longitude}&query=pharmacies%20and%20drug%20store&radius=300&type=pharmacy&key=$apiKey";
+            fetchPharmacyLocations();
+          }
         });
-        }
       }
-    });
-  }
+    }
+    // Remove location update listener after fetching pharmacy locations
+    if (_pharmacyLocationsFetched) {
+      location.onLocationChanged.listen(null);
+    }
+  });
+ }
 }
