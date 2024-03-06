@@ -45,6 +45,8 @@ class ResultScreen extends StatelessWidget {
             final hospitalPrice = matchingDrugs[index]['hospitalPrice'];
             final phPrice = matchingDrugs[index]['pharmaPrice'];
             final barcode = matchingDrugs[index]['barCode'];
+            final uses = matchingDrugs[index]['uses'];
+            final sideEffects = matchingDrugs[index]['side_effects'];
 
             return ListTile(
               onTap: () {
@@ -58,6 +60,8 @@ class ResultScreen extends StatelessWidget {
                       price2: hospitalPrice,
                       price3: phPrice,
                       barcode: barcode,
+                      uses: uses,
+                      sideEffects: sideEffects,
                     ),
                   ),
                 );
