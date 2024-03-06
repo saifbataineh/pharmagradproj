@@ -190,7 +190,8 @@ class DetailsPage extends StatelessWidget {
                                     matchingDrugs[index]['pharmaPrice'];
                                 final barcode = matchingDrugs[index]['barCode'];
                                 final sci = matchingDrugs[index]['sci'];
-
+                                final uses = matchingDrugs[index]['uses'];
+                                final sideEffects = matchingDrugs[index]['side_effects'];
                                 return GestureDetector(
                                   onTap: () => Navigator.of(context)
                                       .push(MaterialPageRoute(
@@ -202,6 +203,8 @@ class DetailsPage extends StatelessWidget {
                                                 price1: price1,
                                                 price2: price2,
                                                 price3: price3,
+                                                uses: uses,
+                                                sideEffects: sideEffects,
                                               ))),
                                   child: SizedBox(
                                       height: 100,

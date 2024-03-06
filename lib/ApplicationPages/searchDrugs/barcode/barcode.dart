@@ -21,6 +21,9 @@ class _BarCodePageState extends State<BarCodePage> {
     context.read<TextProvider>().fetchData;
     return Consumer<TextProvider>(builder: (context, provider, child) {
       return Scaffold(
+        appBar: AppBar(
+          title: const Text('Barcode Search'),
+        ),
           body: Center(
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -52,6 +55,8 @@ class _BarCodePageState extends State<BarCodePage> {
                                 price2: drug["hospitalPrice"],
                                 price3: drug["pharmaPrice"],
                                 pack: drug["pack"],
+                                uses: drug["uses"],
+                                sideEffects: drug["side_effects"],
                               ),
                             ),
                           );
@@ -62,9 +67,9 @@ class _BarCodePageState extends State<BarCodePage> {
                   }
                 },
                 child: result.isEmpty
-                    ? const Text('Open Scanner  ')
+                    ? const Text('Open Scanner')
                     : const Text(
-                        "no bar code were found please try again",
+                        "No Bar Code Were Found, Please Try Again.",
                         style:
                             TextStyle(color: Color.fromARGB(255, 168, 42, 13)),
                       ))
