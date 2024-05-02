@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:grad_test_1/ApplicationPages/searchDrugs/barcode/barcode.dart';
 import 'package:grad_test_1/ApplicationPages/searchDrugs/recognitions/recognitions/camera%20recognition/ocr.dart/optiocal_char_reco.dart';
 import 'package:grad_test_1/ApplicationPages/searchDrugs/recognitions/text_voice_page.dart';
+import 'package:grad_test_1/generated/l10n.dart';
 
 
 
@@ -20,7 +21,7 @@ class FeatureSelector extends StatelessWidget {
             borderOnForeground: true,
             child: ListTile(
                 splashColor: Colors.deepOrange,
-                title: const Text("Search For Drugs Via Voice or Text"),
+                title:  Text(S.of(context).textSearch),
                 leading: const Column(
                   children: [
                     Icon(Icons.text_fields),
@@ -35,7 +36,7 @@ class FeatureSelector extends StatelessWidget {
           Card(
             borderOnForeground: true,
             child: ListTile(
-                title: const Text("Search By Name Using Camera"),
+                title:  Text(S.of(context).cameraSearch),
                 leading: const Icon(Icons.add_a_photo),
                 onTap: () {
                   Navigator.of(context).push(
@@ -45,7 +46,7 @@ class FeatureSelector extends StatelessWidget {
           Card(
               borderOnForeground: true,
               child: ListTile(
-                  title: const Text("Search By Barcode Using Camera"),
+                  title:  Text(S.of(context).barcodeSearch),
                   onTap: () {
                     Navigator.of(context).push(
                         MaterialPageRoute(builder: (cxt) => const BarCodePage()));

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:grad_test_1/generated/l10n.dart';
 import 'package:location/location.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'dart:convert';
@@ -66,13 +67,13 @@ class _MapPageState extends State<MapPage> {
       
       body:
       _currentPosition == null || pharmacyMarkers.isEmpty ? 
-      const Center(
+       Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CircularProgressIndicator(color: Color.fromARGB(255, 146, 82, 220)),
             SizedBox(height: 15),
-            Text("Loading Locations...")
+            Text(S.of(context).loading)
           ],
         )) :
          
@@ -84,7 +85,7 @@ class _MapPageState extends State<MapPage> {
               markerId: const MarkerId("currentPosition"),
               position: _currentPosition!,
               icon: homeMarkerIcon, // Use your home marker icon
-              infoWindow: const InfoWindow(title: "Your Location"),
+              infoWindow:  InfoWindow(title: S.of(context).yourLcoation),
             )},//here to display markers,
         circles: Set.of((_radarCircle != null) ? [_radarCircle!] : []),
         onMapCreated: (GoogleMapController controller) {
@@ -151,16 +152,16 @@ class _MapPageState extends State<MapPage> {
 
   void showNoInternetSnackBar() {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('No Internet Connection, Check your internet connection.'),
+       SnackBar(
+        content: Text(S.of(context).nointcon),
         backgroundColor: Colors.red,
       ),
     );
   }
   void showInternetSnackBar() {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Connect to Maps...'),
+       SnackBar(
+        content: Text(S.of(context).connect),
         backgroundColor: Colors.green,
       ),
     );
@@ -179,8 +180,8 @@ class _MapPageState extends State<MapPage> {
 
       if (!context.mounted) return;
           ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Location Service Disabled.'),
+           SnackBar(
+            content: Text(S.of(context).locationServ),
             backgroundColor: Colors.red,
           ),
         );
@@ -194,8 +195,8 @@ class _MapPageState extends State<MapPage> {
       if (permissionGranted != PermissionStatus.granted) {
         if (!context.mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Location Access Denied.'),
+         SnackBar(
+          content: Text(S.of(context).locationden),
           backgroundColor: Colors.red,
         ),
       );

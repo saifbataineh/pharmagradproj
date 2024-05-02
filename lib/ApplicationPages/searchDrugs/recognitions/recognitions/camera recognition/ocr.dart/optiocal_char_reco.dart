@@ -4,6 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:grad_test_1/ApplicationPages/searchDrugs/recognitions/recognitions/camera%20recognition/ocr.dart/result_screen.dart';
+import 'package:grad_test_1/generated/l10n.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 
@@ -67,7 +68,7 @@ class _OpitcalCharState extends State<OpitcalChar> with WidgetsBindingObserver {
                     }),
               Scaffold(
                   appBar: AppBar(
-                    title: const Text("Text recognition sample"),
+                    title:  Text(S.of(context).titleCamera),
                   ),
                   backgroundColor:
                       _ispermissionGranted ? Colors.transparent : null,
@@ -81,7 +82,7 @@ class _OpitcalCharState extends State<OpitcalChar> with WidgetsBindingObserver {
                             child: Center(
                               child: ElevatedButton(
                                 onPressed: _scanImage,
-                                child: const Text("scan Text"),
+                                child:  Text(S.of(context).checkPhoto),
                               ),
                             ),
                           )
@@ -89,8 +90,8 @@ class _OpitcalCharState extends State<OpitcalChar> with WidgetsBindingObserver {
                       : Center(
                           child: Container(
                             padding: const EdgeInsets.only(left: 24, right: 24),
-                            child: (const Text(
-                              "Camera permission is denied",
+                            child: (Text(
+                              S.of(context).cameraPermission,
                               textAlign: TextAlign.center,
                             )),
                           ),
@@ -160,7 +161,7 @@ class _OpitcalCharState extends State<OpitcalChar> with WidgetsBindingObserver {
     } catch (e) {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("an error occured when scanning the text")));
+           SnackBar(content: Text(S.of(context).camraError)));
     }
   }
 }

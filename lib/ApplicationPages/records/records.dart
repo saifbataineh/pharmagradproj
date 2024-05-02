@@ -13,7 +13,7 @@ class _RecordsState extends State<Records> {
   final _currentUserEmail = FirebaseAuth.instance.currentUser?.email;
   late final Stream<DocumentSnapshot>? _usersStream;
   final _formKey = GlobalKey<FormState>();
-  TextEditingController _value = TextEditingController();
+  final TextEditingController _value = TextEditingController();
   String? drug = "Diabetes";
   @override
   void initState() {
@@ -31,7 +31,7 @@ class _RecordsState extends State<Records> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         onPressed: () {
           showDialog(
             context: context,
@@ -75,7 +75,7 @@ class _RecordsState extends State<Records> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
-                              margin: EdgeInsets.all(20),
+                              margin: const EdgeInsets.all(20),
                               child: Column(
                                 children: [
                                   const Text("Diabetes",),
@@ -132,7 +132,7 @@ class _RecordsState extends State<Records> {
 
                                 // Ensure alarm triggers even in doze mode
                               }
-                }, child: Text("save"))
+                }, child: const Text("save"))
               ],
             ),
           );

@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:grad_test_1/ApplicationPages/searchDrugs/resultsPage/details_screen.dart';
 import 'package:grad_test_1/Providers/listen_provider.dart';
+import 'package:grad_test_1/generated/l10n.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 
@@ -22,7 +23,7 @@ class _BarCodePageState extends State<BarCodePage> {
     return Consumer<TextProvider>(builder: (context, provider, child) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text('Barcode Search'),
+          title:  Text(S.of(context).barcodeSearch),
         ),
           body: Center(
               child: Column(
@@ -67,11 +68,11 @@ class _BarCodePageState extends State<BarCodePage> {
                   }
                 },
                 child: result.isEmpty
-                    ? const Text('Open Scanner')
-                    : const Text(
-                        "No Bar Code Were Found, Please Try Again.",
+                    ?  Text(S.of(context).openScanner)
+                    : Text(
+                        S.of(context).NobarCode,
                         style:
-                            TextStyle(color: Color.fromARGB(255, 168, 42, 13)),
+                            const TextStyle(color: Color.fromARGB(255, 168, 42, 13)),
                       ))
           ])));
     });

@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:grad_test_1/generated/l10n.dart';
 import 'package:location/location.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'dart:convert';
@@ -97,7 +98,7 @@ class _LocateDrugState extends State<LocateDrugPage> {
           icon: pharmacyMarkerIcon, // Use the pharmacy marker icon
           infoWindow: InfoWindow(
             title: pharmacyName,
-            snippet: isOpen ? 'Open Now' : 'Closed',
+            snippet: isOpen ? S.of(context).pharmaOpen : S.of(context).pharmaClosed,
           ),
         );
         updatedMarkers.add(locationMarker);
@@ -140,13 +141,13 @@ class _LocateDrugState extends State<LocateDrugPage> {
     ),
     body:
     _currentPosition == null ? 
-    const Center(
+     Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          CircularProgressIndicator(color: Color.fromARGB(255, 146, 82, 220)),
-          SizedBox(height: 15),
-          Text("Loading Locations...")
+          const CircularProgressIndicator(color: Color.fromARGB(255, 146, 82, 220)),
+          const SizedBox(height: 15),
+          Text(S.of(context).loading)
         ],
       )) 
       : pharmacyMarkers.isEmpty
@@ -155,7 +156,7 @@ class _LocateDrugState extends State<LocateDrugPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'No pharmacies located with ${widget.searchedDrug}',
+                      '${S.of(context).nopharma} ${widget.searchedDrug}',
                       style: const TextStyle(fontSize: 16),
                     ),
                     const SizedBox(height: 20),
@@ -163,7 +164,7 @@ class _LocateDrugState extends State<LocateDrugPage> {
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      child: const Text('Return'),
+                      child:  Text(S.of(context).Return),
                     ),
                   ],
                 ),
@@ -179,7 +180,7 @@ class _LocateDrugState extends State<LocateDrugPage> {
             markerId: const MarkerId("currentPosition"),
             position: _currentPosition!,
             icon: homeMarkerIcon, 
-            infoWindow: const InfoWindow(title: "Your Location"),
+            infoWindow: InfoWindow(title: S.of(context).yourLcoation),
           )},
       circles: Set.of((_radarCircle != null) ? [_radarCircle!] : []),
       onMapCreated: (GoogleMapController controller) {
@@ -210,16 +211,16 @@ class _LocateDrugState extends State<LocateDrugPage> {
 
   void showNoInternetSnackBar() {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Check your internet connection for better usage to directions and location information.'),
+       SnackBar(
+        content: Text(S.of(context).checkInt),
         backgroundColor: Colors.red,
       ),
     );
   }
   void showInternetSnackBar() {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Connect to Maps...'),
+       SnackBar(
+        content: Text(S.of(context).connect),
         backgroundColor: Colors.green,
       ),
     );
@@ -227,19 +228,19 @@ class _LocateDrugState extends State<LocateDrugPage> {
 
 //Location Updates:
   Future<void> getLocationUpdates() async {
-    bool _serviceEnabled;
-    PermissionStatus _permissionGranted;
+    bool serviceEnabled;
+    PermissionStatus permissionGranted;
     
-    _serviceEnabled = await location.serviceEnabled();
-    if (!_serviceEnabled) {
-      _serviceEnabled = await location.requestService();
+    serviceEnabled = await location.serviceEnabled();
+    if (!serviceEnabled) {
+      serviceEnabled = await location.requestService();
     }
-    if (!_serviceEnabled) {
+    if (!serviceEnabled) {
 
       if (!context.mounted) return;
           ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Location Service Disabled.'),
+           SnackBar(
+            content: Text(S.of(context).locationServ),
             backgroundColor: Colors.red,
           ),
         );
@@ -247,14 +248,14 @@ class _LocateDrugState extends State<LocateDrugPage> {
       return;
     }
     
-    _permissionGranted = await location.hasPermission();
-    if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await location.requestPermission();
-      if (_permissionGranted != PermissionStatus.granted) {
+    permissionGranted = await location.hasPermission();
+    if (permissionGranted == PermissionStatus.denied) {
+      permissionGranted = await location.requestPermission();
+      if (permissionGranted != PermissionStatus.granted) {
         if (!context.mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Location Access Denied.'),
+         SnackBar(
+          content: Text(S.of(context).locationden),
           backgroundColor: Colors.red,
         ),
       );

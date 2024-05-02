@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_test_1/ApplicationPages/Category/category.dart';
+
+import 'package:grad_test_1/ApplicationPages/Category/pop_restric.dart';
+import 'package:grad_test_1/generated/l10n.dart';
 import 'package:grad_test_1/sign-in-up-page/authScreen/auth_service.dart';
 
 class SignUp extends StatefulWidget {
@@ -27,8 +29,8 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'SignUp Page',
+        title: Text(
+          S.of(context).SignUpPage,
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
       ),
@@ -43,17 +45,17 @@ class _SignUpState extends State<SignUp> {
                 //name text form field
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                     filled: true,
-                    fillColor: Color.fromARGB(40, 124, 77, 255),
-                    border: OutlineInputBorder(
+                    fillColor: const Color.fromARGB(40, 124, 77, 255),
+                    border: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(30))),
-                    hintText: 'your name',
-                    labelText: 'name',
-                    prefixIcon: Icon(Icons.person)),
+                    hintText: S.of(context).yournamesu,
+                    labelText: S.of(context).name,
+                    prefixIcon: const Icon(Icons.person)),
                 validator: (value) {
                   if (value == null || value.isEmpty || value.length < 4) {
-                    return 'your name must be 4 charachters at least';
+                    return S.of(context).shortName;
                   }
                   return null;
                 },
@@ -66,17 +68,17 @@ class _SignUpState extends State<SignUp> {
                 controller: _email,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                     filled: true,
-                    fillColor: Color.fromARGB(40, 124, 77, 255),
-                    border: OutlineInputBorder(
+                    fillColor: const Color.fromARGB(40, 124, 77, 255),
+                    border: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(30))),
                     hintText: 'abc@example.com',
-                    labelText: 'email',
-                    prefixIcon: Icon(Icons.email_outlined)),
+                    labelText: S.of(context).email,
+                    prefixIcon: const Icon(Icons.email_outlined)),
                 validator: (value) {
                   if (value == null || value.isEmpty || !value.contains('@')) {
-                    return 'please enter correct email';
+                    return S.of(context).emailError;
                   }
                   return null;
                 },
@@ -94,7 +96,7 @@ class _SignUpState extends State<SignUp> {
                     fillColor: const Color.fromARGB(40, 124, 77, 255),
                     border: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(30))),
-                    labelText: 'password',
+                    labelText: S.of(context).pass,
                     suffixIcon: //show password toggle
                         IconButton(
                             onPressed: _toggleVisibility,
@@ -104,7 +106,7 @@ class _SignUpState extends State<SignUp> {
                     prefixIcon: const Icon(Icons.password_outlined)),
                 validator: (value) {
                   if (value == null || value.isEmpty || value.length < 5) {
-                    return 'please enter your password';
+                    return S.of(context).plspass;
                   }
                   return null;
                 },
@@ -128,21 +130,21 @@ class _SignUpState extends State<SignUp> {
                     fillColor: const Color.fromARGB(40, 124, 77, 255),
                     border: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(30))),
-                    labelText: 'confirmed password ',
+                    labelText: S.of(context).confirmPass,
                     prefixIcon: const Icon(Icons.password)),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'please confirm your password';
+                    return S.of(context).doublecheckpass;
                   }
                   if (value != _pass.text) {
-                    return 'password doesn\'t match';
+                    return S.of(context).doesmatch;
                   }
                   return null;
                 },
               ),
             ),
             ElevatedButton(
-                child: const Text('Sign up '),
+                child: Text(S.of(context).SignUp),
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     final message = await AuthService().registration(
@@ -152,17 +154,26 @@ class _SignUpState extends State<SignUp> {
                     if (message!.contains('Success')) {
                       FirebaseFirestore.instance
                           .collection("users")
-                          .doc(_email.text).set({});
+                          .doc(_email.text)
+                          .set({});
                       if (!context.mounted) return;
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
-                              builder: (ctx) => CategorySelector()),
+                              builder: (ctx) => PopRestrict()),
                           (route) => false);
                     }
                     if (!context.mounted) return;
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text(message),
+                        content: Text(
+                          message=='Success'?S.of(context).suc:
+                          message ==
+                                "The password provided is too weak."
+                            ? S.of(context).weakPass
+                            : message ==
+                                    "The account already exists for that email."
+                                ? S.of(context).alreadyInUse
+                                : S.of(context).error),
                       ),
                     );
                   }
@@ -197,9 +208,9 @@ class _SignInFormState extends State<SignInForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'SignIn Page',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+        title:  Text(
+          S.of(context).SignInPage,
+          style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
       ),
       body: SingleChildScrollView(
@@ -213,18 +224,18 @@ class _SignInFormState extends State<SignInForm> {
                 controller: _email,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                     //sign in email
                     filled: true,
-                    fillColor: Color.fromARGB(40, 124, 77, 255),
-                    border: OutlineInputBorder(
+                    fillColor: const Color.fromARGB(40, 124, 77, 255),
+                    border: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(30))),
                     hintText: 'abc@example.com',
-                    labelText: 'email',
-                    prefixIcon: Icon(Icons.email_outlined)),
+                    labelText: S.of(context).email,
+                    prefixIcon: const Icon(Icons.email_outlined)),
                 validator: (value) {
                   if (value == null || value.isEmpty || !value.contains('@')) {
-                    return 'please enter your email';
+                    return S.of(context).emailError;
                   }
                   return null;
                 },
@@ -248,11 +259,11 @@ class _SignInFormState extends State<SignInForm> {
                     fillColor: const Color.fromARGB(40, 124, 77, 255),
                     border: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(30))),
-                    labelText: 'password',
+                    labelText: S.of(context).pass,
                     prefixIcon: const Icon(Icons.password_outlined)),
                 validator: (value) {
                   if (value == null || value.isEmpty || value.length < 5) {
-                    return 'please enter your password';
+                    return S.of(context).plspass;
                   }
                   return null;
                 },
@@ -268,18 +279,18 @@ class _SignInFormState extends State<SignInForm> {
                   if (!context.mounted) return;
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
-                        builder: (context) => CategorySelector(),
+                        builder: (context) => const PopRestrict(),
                       ),
                       (Route<dynamic> route) => false);
                 }
                 if (!context.mounted) return;
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text(message),
+                    content: Text(message=='Success'?S.of(context).suc: S.of(context).error2),
                   ),
                 );
               },
-              child: const Text('Login'),
+              child:  Text(S.of(context).login),
             ),
           ]),
         ),

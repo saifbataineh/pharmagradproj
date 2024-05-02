@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:grad_test_1/ApplicationPages/Category/category.dart';
+import 'package:grad_test_1/generated/l10n.dart';
 
 
 
@@ -17,13 +18,13 @@ class _PopRestrictState extends State<PopRestrict> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Are you sure?'),
-          content:const Text.rich(
+          title:  Text(S.of(context).ays),
+          content: Text.rich(
             TextSpan(
-              text: 'you want to leave ',
-              style: TextStyle(color:Colors.grey),
-              children:[
-                TextSpan(text: '  Pharma Tails ?',style: TextStyle(color: Colors.deepPurpleAccent,fontWeight: FontWeight.bold))
+              text: S.of(context).wtl,
+              style: const TextStyle(color:Colors.grey),
+              children: [
+                TextSpan(text: S.of(context).pharmaTails,style: const TextStyle(color: Colors.deepPurpleAccent,fontWeight: FontWeight.bold))
               ] )
           ),
           actions: <Widget>[
@@ -31,7 +32,7 @@ class _PopRestrictState extends State<PopRestrict> {
               style: TextButton.styleFrom(
                 textStyle: Theme.of(context).textTheme.labelLarge,
               ),
-              child: const Text('Nevermind'),
+              child:  Text(S.of(context).nvm),
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -40,7 +41,7 @@ class _PopRestrictState extends State<PopRestrict> {
               style: TextButton.styleFrom(
                 textStyle: Theme.of(context).textTheme.labelLarge,
               ),
-              child: const Text('Leave'),
+              child:  Text(S.of(context).leave),
               onPressed: () {
                 Navigator.pop(context);
                 Navigator.pop(context);

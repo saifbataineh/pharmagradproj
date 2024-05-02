@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:grad_test_1/ApplicationPages/maps/drug_location.dart';
 import 'package:grad_test_1/ApplicationPages/searchDrugs/resultsPage/fab.dart';
 import 'package:grad_test_1/Providers/listen_provider.dart';
+import 'package:grad_test_1/generated/l10n.dart';
 import 'package:provider/provider.dart';
 
 class DetailsPage extends StatelessWidget {
@@ -105,7 +106,7 @@ class DetailsPage extends StatelessWidget {
                           child: ListTile(
                             iconColor: Colors.deepPurpleAccent,
                             leading: const Icon(Icons.account_circle),
-                            title: const Text("Uses:"),
+                            title:  Text(S.of(context).uses),
                             subtitle: Text(uses.trim()),
                           ),
                         ),
@@ -118,44 +119,44 @@ class DetailsPage extends StatelessWidget {
                           child: ListTile(
                             iconColor: Colors.deepPurpleAccent,
                             leading: const Icon(Icons.six_k_rounded),
-                            title: const Text("Side Effects:"),
+                            title: Text(S.of(context).SideEffects),
                             subtitle: Text(sideEffects),
                           ),
                         ),
                         ListTile(
                           iconColor: Colors.deepPurpleAccent,
                           leading: const Icon(Icons.attach_money_outlined),
-                          title: const Text("Jordanian public price"),
-                          subtitle: Text("$price1 \$"),
+                          title:  Text(S.of(context).jor_price),
+                          subtitle: Text("$price1 jod"),
                         ),
                         ListTile(
                           iconColor: Colors.deepPurpleAccent,
                           leading: const Icon(Icons.account_balance),
-                          title: const Text("Hospital price"),
-                          subtitle: Text("$price2 \$"),
+                          title:  Text(S.of(context).hos_price),
+                          subtitle: Text("$price2 jod"),
                         ),
                         ListTile(
                           iconColor: Colors.deepPurpleAccent,
                           leading: const Icon(Icons.attach_money_outlined),
-                          title: const Text("Pharmacist price"),
-                          subtitle: Text("$price3 \$"),
+                          title:  Text(S.of(context).ph_price),
+                          subtitle: Text("$price3 jod"),
                         ),
                         ListTile(
                           iconColor: Colors.deepPurpleAccent,
                           leading: const Icon(Icons.numbers),
-                          title: const Text("Packing"),
+                          title:  Text(S.of(context).packing),
                           subtitle: Text(pack),
                         ),
                         ListTile(
                           iconColor: Colors.deepPurpleAccent,
                           leading: const Icon(Icons.science),
-                          title: const Text("Generic name"),
+                          title:  Text(S.of(context).generic_name),
                           subtitle: Text(sci),
                         ),
                         ListTile(
                           iconColor: Colors.deepPurpleAccent,
                           leading: const Icon(Icons.barcode_reader),
-                          title: const Text("barcode"),
+                          title:  Text(S.of(context).barcoden),
                           subtitle: Text(barcode),
                         ),
 

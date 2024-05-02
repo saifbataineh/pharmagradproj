@@ -1,0 +1,106 @@
+{
+    "lagn":"عربي",
+    "login": "Log In",
+    "SignUp": "Sign Up",
+    "SignUpPage":"Sign Up Page",
+    "yournamesu":"Your name",
+    "name": "name",
+    "shortName":"your name must be 4 charachters at least",
+    "email": "email",
+    "emailError":"Email must contain @",
+    "pass": "password",
+    "plspass":"enter password that at least 5 charachters",
+    "confirmPass": "confirmed password",
+    "doublecheckpass":"please confirm your password",
+    "doesmatch":"passwords doesn't match",
+    
+    "weakPass":"weak Password",
+    "alreadyInUse":"The account already exists for that email.",
+    "error":"something went wrong, please try again",
+    "suc":"success",
+    "error2":"please check your password or email",
+
+    "SignInPage":"Sign In Page",
+    "ays":"are you sure you want to exit",
+    "wtl":"you want to leave ",
+    "pharmaTails":"Pharma Tails",
+    "nvm":"Never mind",
+    "leave":"leave",
+
+
+    "searchDrug": "Search For Your Drug",
+    "nearPharma": "Nearest Pharmacies",
+    "alarm": " Alarm For Drug Doses",
+    "records": " Records",
+
+
+    "textSearch": "Search For Drug Via Voice or Text",
+    "cameraSearch": "Search By Name Using Camera",
+    "barcodeSearch": "Search By Barcode Using Camera",
+
+
+    "searchInput": "Enter Drug Name:",
+    "searchVoice": "hold the button and start speaking",
+    "plspress":"* if you don't see the suggetions\n please tap on the text form",
+    "titleCamera": "take photo of the drug package",
+    "checkPhoto":"discover the drug",
+    "cameraPermission":"Camera permission is denied",
+    "camraError":"an error occured when scanning the text",
+    "openScanner":" Open Scanner",
+    "NobarCode":"No Bar Code Were Found, Please Try Again.",
+    "Result":"Result",
+    "uses":"uses:",
+    "SideEffects":"SideEffects",
+    "jor_price": "Jordanian public price",
+    "hos_price": "Hospital price",
+    "ph_price": "Pharmacist price",
+    "packing": "Packing",
+    "generic_name": "Generic Name",
+    "barcoden":"Bar Code",
+
+
+    
+
+    "alarmMissingValue":"please enter the drug name ",
+    "alarmMissingValue2":"please enter the pills number ",
+    "alarmMissingValue3":"please enter the daily dose ",
+    "alarmName": "your Drug",
+    "alarmName2": "Drug Name",
+    "alarmEmpty": "No alarm(s) is set yet",
+    "alarmAddbutton": "Add your drug",
+    "alarmPillsLeft": "Pills Left!",
+    
+    "alarmPacking": "Packing",
+    "alarmPacking2": "Number Of pills",
+    "alarmDose": " dayly Dose",
+    "alarmDose1": "Dose",
+    "alarmText": "Way of taking the medication",
+    "alarmPills": "Pills",
+    "alarmSyrup": "Syrup",
+    "alarmDrops": "Drops",
+    "alarmSave": "set Alarm",
+    "alarmCancel": "Cancel",
+    "errorText":" Something went wrong",
+    "Loading":" Loading...",
+
+
+    "records-value": "value",
+    "records-text": "Your Record Type",
+    "records-diabetes": "Diabetes", 
+    "records-pressure": "Pressure",
+    "records-save": "Save",
+    "records-cancel": "Cancel",
+    
+
+    "pharmaOpen": "Open Now", 
+    "pharmaClosed": "Closed",
+    "loading":"Loading Locations...",
+    "nopharma":"No pharmacies located with",
+    "Return":" Return",
+    "yourLcoation":"Your location",
+    "checkInt":"Check your internet connection for better usage to directions and location information.",
+    "connect":"Connect to Maps...",
+    "locationServ":"Location Service Disabled.",
+    "locationden":"Location Access Denied.",
+    "nointcon":"No Internet Connection, Check your internet connection. "
+}

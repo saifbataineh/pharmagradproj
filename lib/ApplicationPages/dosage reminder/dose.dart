@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_test_1/ApplicationPages/dosage%20reminder/ring.dart';
+import 'package:grad_test_1/generated/l10n.dart';
 
 class Dose extends StatefulWidget {
   const Dose({super.key});
@@ -72,21 +73,21 @@ class _DoseState extends State<Dose> {
                                   child: TextFormField(
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
-                                        return "please enter a value";
+                                        return S.of(context).alarmMissingValue;
                                       }
                                       return null;
                                     },
                                     controller: _name,
-                                    decoration: const InputDecoration(
+                                    decoration:  InputDecoration(
                                       filled: true,
                                       fillColor:
-                                          Color.fromARGB(40, 124, 77, 255),
-                                      border: OutlineInputBorder(
+                                          const Color.fromARGB(40, 124, 77, 255),
+                                      border: const OutlineInputBorder(
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(30))),
-                                      hintText: 'your drug',
-                                      labelText: 'Drug Name',
-                                      contentPadding: EdgeInsets.all(6),
+                                      hintText: S.of(context).alarmName,
+                                      labelText: S.of(context).alarmName2,
+                                      contentPadding: const EdgeInsets.all(6),
                                     ),
                                   ),
                                 ),
@@ -103,23 +104,23 @@ class _DoseState extends State<Dose> {
                                       child: TextFormField(
                                         validator: (value) {
                                           if (value == null || value.isEmpty) {
-                                            return "please enter a value";
+                                            return S.of(context).alarmMissingValue2;
                                           }
                                           return null;
                                         },
                                         controller: _num,
                                         keyboardType: const TextInputType
                                             .numberWithOptions(),
-                                        decoration: const InputDecoration(
+                                        decoration:  InputDecoration(
                                           contentPadding: EdgeInsets.all(6),
                                           filled: true,
                                           fillColor:
-                                              Color.fromARGB(40, 124, 77, 255),
-                                          border: OutlineInputBorder(
+                                              const Color.fromARGB(40, 124, 77, 255),
+                                          border: const OutlineInputBorder(
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(30))),
-                                          hintText: 'pills number',
-                                          labelText: 'packing',
+                                          hintText: S.of(context).alarmPacking2,
+                                          labelText: S.of(context).alarmPacking,
                                         ),
                                       ),
                                     ),
@@ -130,28 +131,28 @@ class _DoseState extends State<Dose> {
                                         controller: _pack123,
                                         validator: (value) {
                                           if (value == null || value.isEmpty) {
-                                            return "please enter a value";
+                                            return S.of(context).alarmMissingValue3;
                                           }
                                           return null;
                                         },
                                         keyboardType: const TextInputType
                                             .numberWithOptions(),
-                                        decoration: const InputDecoration(
+                                        decoration:  InputDecoration(
                                           contentPadding: EdgeInsets.all(6),
                                           filled: true,
                                           fillColor:
-                                              Color.fromARGB(40, 124, 77, 255),
-                                          border: OutlineInputBorder(
+                                              const Color.fromARGB(40, 124, 77, 255),
+                                          border: const OutlineInputBorder(
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(30))),
-                                          hintText: ' daily dose',
-                                          labelText: 'dose',
+                                          hintText: S.of(context).alarmDose,
+                                          labelText: S.of(context).alarmDose1,
                                         ),
                                       ),
                                     ),
                                   ],
                                 ),
-                                const Text("way of taking the medication "),
+                                 Text(S.of(context).alarmText),
                                 const SizedBox(
                                   height: 30,
                                 ),
@@ -160,7 +161,7 @@ class _DoseState extends State<Dose> {
                                   children: [
                                     Column(
                                       children: [
-                                        const Text("pills"),
+                                         Text(S.of(context).alarmPills),
                                         Radio(
                                             value: "pills",
                                             groupValue: drug,
@@ -173,7 +174,7 @@ class _DoseState extends State<Dose> {
                                     ),
                                     Column(
                                       children: [
-                                        const Text("syrup"),
+                                         Text(S.of(context).alarmSyrup),
                                         Radio(
                                             value: "syrup",
                                             groupValue: drug,
@@ -186,7 +187,7 @@ class _DoseState extends State<Dose> {
                                     ),
                                     Column(
                                       children: [
-                                        const Text("drops"),
+                                         Text(S.of(context).alarmDrops),
                                         Radio(
                                             value: "drops",
                                             groupValue: drug,
@@ -248,27 +249,27 @@ class _DoseState extends State<Dose> {
                                       notificationBody: "al dawa ya kabten"));
                              
                             },
-                            child: const Text("save")),
+                            child:  Text(S.of(context).alarmSave)),
                         TextButton(
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
-                            child: const Text("Cancel")),
+                            child:  Text(S.of(context).alarmCancel)),
                       ],
                       icon: const Icon(
                         Icons.abc,
                       )));
             },
-            label: const Text("Add your drug")),
+            label:  Text(S.of(context).alarmAddbutton)),
         
         body: StreamBuilder(
             stream: _usersStream,
             builder: (context, snapshot) {
               if (snapshot.hasError) {
-                return const Text('Something went wrong');
+                return  Text(S.of(context).errorText);
               }
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Text("Loading");
+                return  Text(S.of(context).Loading);
               }
               late final Map<String, dynamic> userData;
               try {
@@ -278,8 +279,8 @@ class _DoseState extends State<Dose> {
               }
 
               return userData.isEmpty
-                  ? const Center(
-                      child: Text("No alarms is set yet"),
+                  ?  Center(
+                      child: Text(S.of(context).alarmEmpty),
                     )
                   : ListView.builder(
                       itemCount: userData.length,
@@ -298,7 +299,7 @@ class _DoseState extends State<Dose> {
                               color: Colors.white,
                             ),
                             trailing: Text(
-                              "pills left \n${mapValue['pack'].toString()}",
+                              "${S.of(context).alarmPillsLeft} \n${mapValue['pack'].toString()}",
                               textAlign: TextAlign.center,
                             ),
                             title: Text(mapKey),

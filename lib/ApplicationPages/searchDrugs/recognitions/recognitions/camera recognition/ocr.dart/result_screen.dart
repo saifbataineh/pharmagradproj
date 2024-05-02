@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grad_test_1/ApplicationPages/searchDrugs/resultsPage/details_screen.dart';
 import 'package:grad_test_1/Providers/listen_provider.dart';
+import 'package:grad_test_1/generated/l10n.dart';
 import 'package:provider/provider.dart';
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
 
@@ -33,7 +34,7 @@ class ResultScreen extends StatelessWidget {
 
       return Scaffold(
         appBar: AppBar(
-          title: const Text("Result"),
+          title:  Text(S.of(context).Result),
         ),
         body: ListView.builder(
           itemCount: matchingDrugs.length,

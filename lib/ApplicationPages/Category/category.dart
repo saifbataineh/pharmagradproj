@@ -3,11 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:grad_test_1/ApplicationPages/dosage%20reminder/dose.dart';
 import 'package:grad_test_1/ApplicationPages/records/records.dart';
 import 'package:grad_test_1/ApplicationPages/searchDrugs/featureSelector/feature_selector.dart';
-import 'package:grad_test_1/sign-in-up-page/welcome_page.dart';
+import 'package:grad_test_1/generated/l10n.dart';
+import 'package:grad_test_1/main.dart';
 import 'package:grad_test_1/ApplicationPages/maps/google_maps.dart';
 
-class CategorySelector extends StatelessWidget {
-  CategorySelector({super.key});
+class CategorySelector extends StatefulWidget {
+  const CategorySelector({super.key});
+
+  @override
+  State<CategorySelector> createState() => _CategorySelectorState();
+}
+
+class _CategorySelectorState extends State<CategorySelector> {
+ 
+    
 
   final List<IconData> icons = [
     Icons.local_pharmacy_outlined,
@@ -15,28 +24,34 @@ class CategorySelector extends StatelessWidget {
     Icons.access_alarm,
     Icons.border_color,
   ];
-  final List<String> texts = [
-    "Nearest Pharmacies",
-    "Search For Your Drug",
-    "Set Alarm For Drug Doses",
-    "Your Records",
-  ];
+
+ 
 
   final List<Widget> pages = [
     const MapPage(),
     const FeatureSelector(),
     const Dose(),
     const Records(),
-  ]; // Your list of icons
-
+  ]; 
+  @override
+  void initState() {
+    super.initState();
+  }
+ // Your list of icons
   @override
   Widget build(BuildContext context) {
+     final List<String> texts = [
+    S.of(context).nearPharma,
+    S.of(context).searchDrug,
+    S.of(context).alarm,
+    S.of(context).records,
+  ];
     return DefaultTabController(
         initialIndex: 1,
         length: pages.length,
         child: Scaffold(
           appBar: AppBar(
-            title: const Text("PharmaTails"),
+            title:  Text(S.of(context).pharmaTails),
             bottom: TabBar(
               physics: const ClampingScrollPhysics(),
                 tabAlignment: TabAlignment.start,
@@ -67,7 +82,7 @@ class CategorySelector extends StatelessWidget {
                         FirebaseAuth.instance.signOut();
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
-                                builder: (ctx) => const WelcomePage()),
+                                builder: (ctx) =>   const MyApp()),
                             (route) => false);
                       },
                       icon: const Icon(Icons.logout)))

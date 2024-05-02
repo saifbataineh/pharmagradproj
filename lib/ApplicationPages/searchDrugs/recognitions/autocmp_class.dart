@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
 import 'package:grad_test_1/ApplicationPages/searchDrugs/resultsPage/details_screen.dart';
 import 'package:grad_test_1/Providers/listen_provider.dart';
+import 'package:grad_test_1/generated/l10n.dart';
 import 'package:provider/provider.dart';
 
 class AutoCompleteSearch extends StatefulWidget {
@@ -31,7 +32,7 @@ class _AutoCompleteSearchState extends State<AutoCompleteSearch> {
               : Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Enter Drug Name:", style: TextStyle(fontSize: 15),),
+                     Text(S.of(context).searchInput, style: const TextStyle(fontSize: 15),),
                     RawAutocomplete<String>(
                         focusNode: focusNode,
                         textEditingController: controller,
