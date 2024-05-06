@@ -58,6 +58,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Way of taking the medication"),
         "alreadyInUse": MessageLookupByLibrary.simpleMessage(
             "The account already exists for that email."),
+        "alter": MessageLookupByLibrary.simpleMessage("alternatives"),
         "ays": MessageLookupByLibrary.simpleMessage(
             "are you sure you want to exit"),
         "barcodeSearch": MessageLookupByLibrary.simpleMessage(
@@ -103,6 +104,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "name": MessageLookupByLibrary.simpleMessage("name"),
         "nearPharma":
             MessageLookupByLibrary.simpleMessage("Nearest Pharmacies"),
+        "noPrice":
+            MessageLookupByLibrary.simpleMessage("have no available price!"),
         "nointcon": MessageLookupByLibrary.simpleMessage(
             "No Internet Connection, Check your internet connection. "),
         "nopharma":

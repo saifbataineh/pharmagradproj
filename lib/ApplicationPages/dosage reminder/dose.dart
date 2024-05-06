@@ -112,7 +112,7 @@ class _DoseState extends State<Dose> {
                                         keyboardType: const TextInputType
                                             .numberWithOptions(),
                                         decoration:  InputDecoration(
-                                          contentPadding: EdgeInsets.all(6),
+                                          contentPadding: const EdgeInsets.all(6),
                                           filled: true,
                                           fillColor:
                                               const Color.fromARGB(40, 124, 77, 255),
@@ -138,7 +138,7 @@ class _DoseState extends State<Dose> {
                                         keyboardType: const TextInputType
                                             .numberWithOptions(),
                                         decoration:  InputDecoration(
-                                          contentPadding: EdgeInsets.all(6),
+                                          contentPadding: const EdgeInsets.all(6),
                                           filled: true,
                                           fillColor:
                                               const Color.fromARGB(40, 124, 77, 255),

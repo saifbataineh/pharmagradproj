@@ -630,6 +630,16 @@ class S {
     );
   }
 
+  /// `have no available price!`
+  String get noPrice {
+    return Intl.message(
+      'have no available price!',
+      name: 'noPrice',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Packing`
   String get alarmPacking {
     return Intl.message(
@@ -867,6 +877,16 @@ class S {
     return Intl.message(
       'No Internet Connection, Check your internet connection. ',
       name: 'nointcon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `alternatives`
+  String get alter {
+    return Intl.message(
+      'alternatives',
+      name: 'alter',
       desc: '',
       args: [],
     );

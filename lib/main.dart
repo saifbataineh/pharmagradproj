@@ -38,8 +38,10 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   late String? locale;
   Locale localel = const Locale("en");
+ 
   @override
   void initState() {
+    
     setPrefs();
 
     
@@ -94,6 +96,6 @@ class _MyAppState extends State<MyApp> {
             scaffoldBackgroundColor: const Color.fromARGB(255, 51, 51, 51)),
         home: FirebaseAuth.instance.currentUser == null
             ? WelcomePage(currentLocale: localel, onLanguageChange: setLocale)
-            : const PopRestrict());
+            :  PopRestrict(currentLocale: localel,onLanguageChange: setLocale,));
   }
 }

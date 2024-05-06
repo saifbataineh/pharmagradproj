@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:grad_test_1/generated/l10n.dart';
 import 'package:grad_test_1/sign-in-up-page/sign_in_up.dart';
-
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class WelcomePage extends StatefulWidget {
@@ -15,31 +15,21 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
-  late SharedPreferences _prefs;
-  late String? hello;
+
 
   @override
   void initState() {
-    getinit();
+  
     super.initState();
   }
 
-  getinit() async {
-    _prefs = await SharedPreferences.getInstance();
-    
-  }
+ 
 
-  Future<void> _changeLanguage(Locale locale) async {
-    final prefs = _prefs;
-  
-    
-    await prefs.setString('language_code', locale.languageCode);
-    widget.onLanguageChange!(locale);
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
-    hello = _prefs.getString("language_code");
+  
     return Scaffold(
         appBar: AppBar(
             title:  Text(
@@ -57,7 +47,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (ctx) => const SignInForm()));
+                            builder: (ctx) =>  SignInForm(currentLocale: widget.currentLocale,onLanguageChange: widget.onLanguageChange,)));
                   },
                   child: Text(
                     S.of(context).login,
@@ -68,15 +58,17 @@ class _WelcomePageState extends State<WelcomePage> {
               child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (ctx) => const SignUp()));
+                        MaterialPageRoute(builder: (ctx) =>  SignUp(currentLocale: widget.currentLocale,onLanguageChange: widget.onLanguageChange,)));
                   },
                   child: Text(
                     S.of(context).SignUp,
                   ))),
-          hello == 'ar'
+               Intl.getCurrentLocale()=='ar'
+          //hello == 'ar'
               ? ElevatedButton(
                   onPressed: () {
-                    _changeLanguage(Locale('en'));
+
+                    widget.onLanguageChange!(Locale('en'));
                     setState(() {});
                   },
                   child: Text(S.of(context).lagn),
@@ -84,7 +76,7 @@ class _WelcomePageState extends State<WelcomePage> {
               : // Add spacing between buttons
               ElevatedButton(
                   onPressed: () {
-                    _changeLanguage(Locale('ar'));
+                   widget.onLanguageChange!(Locale('ar'));
                     setState(() {});
                   },
                   child: Text(S

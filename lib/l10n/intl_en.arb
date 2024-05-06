@@ -69,6 +69,7 @@
     "alarmEmpty": "No alarm(s) is set yet",
     "alarmAddbutton": "Add your drug",
     "alarmPillsLeft": "Pills Left!",
+    "noPrice":"have no available price!",
     
     "alarmPacking": "Packing",
     "alarmPacking2": "Number Of pills",
@@ -102,5 +103,6 @@
     "connect":"Connect to Maps...",
     "locationServ":"Location Service Disabled.",
     "locationden":"Location Access Denied.",
-    "nointcon":"No Internet Connection, Check your internet connection. "
+    "nointcon":"No Internet Connection, Check your internet connection. ",
+    "alter":"alternatives"
 }

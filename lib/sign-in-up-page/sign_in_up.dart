@@ -6,7 +6,9 @@ import 'package:grad_test_1/generated/l10n.dart';
 import 'package:grad_test_1/sign-in-up-page/authScreen/auth_service.dart';
 
 class SignUp extends StatefulWidget {
-  const SignUp({super.key});
+  const SignUp({super.key, this.currentLocale,this.onLanguageChange});
+  final Locale? currentLocale;
+  final Function(Locale)? onLanguageChange;
   @override
   State<StatefulWidget> createState() {
     return _SignUpState();
@@ -159,7 +161,7 @@ class _SignUpState extends State<SignUp> {
                       if (!context.mounted) return;
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
-                              builder: (ctx) => PopRestrict()),
+                              builder: (ctx) => PopRestrict(currentLocale: widget.currentLocale,onLanguageChange: widget.onLanguageChange,)),
                           (route) => false);
                     }
                     if (!context.mounted) return;
@@ -186,7 +188,9 @@ class _SignUpState extends State<SignUp> {
 }
 
 class SignInForm extends StatefulWidget {
-  const SignInForm({super.key});
+  final Locale? currentLocale;
+  final Function(Locale)? onLanguageChange;
+  const SignInForm({super.key , this.currentLocale, this.onLanguageChange});
 
   @override
   State<SignInForm> createState() => _SignInFormState();
@@ -279,7 +283,7 @@ class _SignInFormState extends State<SignInForm> {
                   if (!context.mounted) return;
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
-                        builder: (context) => const PopRestrict(),
+                        builder: (context) =>  PopRestrict(currentLocale: widget.currentLocale,onLanguageChange: widget.onLanguageChange),
                       ),
                       (Route<dynamic> route) => false);
                 }

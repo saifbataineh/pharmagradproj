@@ -57,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "alarmText": MessageLookupByLibrary.simpleMessage("كيفية اخذ الدواء"),
         "alreadyInUse": MessageLookupByLibrary.simpleMessage(
             "يوجد حساب اخر بنفس البريد الالكتروني"),
+        "alter": MessageLookupByLibrary.simpleMessage("البدائل"),
         "ays": MessageLookupByLibrary.simpleMessage(
             "هل أنت متأكد انك تريد الخروج ؟"),
         "barcodeSearch":
@@ -100,6 +101,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("تسجيل دخول"),
         "name": MessageLookupByLibrary.simpleMessage("الاسم"),
         "nearPharma": MessageLookupByLibrary.simpleMessage("أقرب الصيدليات"),
+        "noPrice": MessageLookupByLibrary.simpleMessage("لا وجود لسعر"),
         "nointcon": MessageLookupByLibrary.simpleMessage(
             "لا يوجد لديك اتصال بالانترنت الرجاء ، الرجاء التأكد من الاتصال "),
         "nopharma":

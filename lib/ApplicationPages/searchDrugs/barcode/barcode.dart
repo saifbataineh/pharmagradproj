@@ -5,6 +5,7 @@ import 'package:grad_test_1/Providers/listen_provider.dart';
 import 'package:grad_test_1/generated/l10n.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
+import 'package:intl/intl.dart';
 
 class BarCodePage extends StatefulWidget {
   const BarCodePage({super.key});
@@ -56,8 +57,8 @@ class _BarCodePageState extends State<BarCodePage> {
                                 price2: drug["hospitalPrice"],
                                 price3: drug["pharmaPrice"],
                                 pack: drug["pack"],
-                                uses: drug["uses"],
-                                sideEffects: drug["side_effects"],
+                                uses:  Intl.getCurrentLocale()=='ar'?drug['usesArabic']: drug["uses"],
+                                sideEffects:Intl.getCurrentLocale()=='ar'?drug['effectsArabic']: drug["side_effects"],
                               ),
                             ),
                           );

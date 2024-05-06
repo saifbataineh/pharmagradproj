@@ -7,9 +7,9 @@ import 'package:grad_test_1/ApplicationPages/searchDrugs/recognitions/recognitio
 import 'package:grad_test_1/generated/l10n.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-
 class OpitcalChar extends StatefulWidget {
-  const OpitcalChar({super.key});
+   OpitcalChar({super.key, this.lang});
+  String? lang;
 
   @override
   State<OpitcalChar> createState() => _OpitcalCharState();
@@ -34,7 +34,8 @@ class _OpitcalCharState extends State<OpitcalChar> with WidgetsBindingObserver {
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
-@override
+
+  @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (_cameraController == null || !_cameraController!.value.isInitialized) {
       return;
@@ -68,7 +69,7 @@ class _OpitcalCharState extends State<OpitcalChar> with WidgetsBindingObserver {
                     }),
               Scaffold(
                   appBar: AppBar(
-                    title:  Text(S.of(context).titleCamera),
+                    title: Text(S.of(context).titleCamera),
                   ),
                   backgroundColor:
                       _ispermissionGranted ? Colors.transparent : null,
@@ -82,7 +83,7 @@ class _OpitcalCharState extends State<OpitcalChar> with WidgetsBindingObserver {
                             child: Center(
                               child: ElevatedButton(
                                 onPressed: _scanImage,
-                                child:  Text(S.of(context).checkPhoto),
+                                child: Text(S.of(context).checkPhoto),
                               ),
                             ),
                           )
@@ -156,12 +157,11 @@ class _OpitcalCharState extends State<OpitcalChar> with WidgetsBindingObserver {
       await Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => ResultScreen(text: recognizedText.text)));
-              
+              builder: (context) => ResultScreen(text: recognizedText.text,lang:widget.lang)));
     } catch (e) {
       if (!context.mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-           SnackBar(content: Text(S.of(context).camraError)));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(S.of(context).camraError)));
     }
   }
 }

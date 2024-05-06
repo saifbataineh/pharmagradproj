@@ -4,6 +4,7 @@ import 'package:grad_test_1/ApplicationPages/searchDrugs/resultsPage/details_scr
 import 'package:grad_test_1/Providers/listen_provider.dart';
 import 'package:grad_test_1/generated/l10n.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AutoCompleteSearch extends StatefulWidget {
   const AutoCompleteSearch({super.key});
@@ -15,10 +16,18 @@ class AutoCompleteSearch extends StatefulWidget {
 class _AutoCompleteSearchState extends State<AutoCompleteSearch> {
   final controller = TextEditingController();
   FocusNode focusNode = FocusNode();
-
+  
+  String? hello;
   @override
   void initState() {
+    checkinit();
     super.initState();
+  }
+
+  checkinit() async {
+    final _prefs = await SharedPreferences.getInstance();
+    hello = _prefs.getString("language_code");
+    print("hello is $hello");
   }
 
   @override
@@ -32,7 +41,10 @@ class _AutoCompleteSearchState extends State<AutoCompleteSearch> {
               : Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                     Text(S.of(context).searchInput, style: const TextStyle(fontSize: 15),),
+                    Text(
+                      S.of(context).searchInput,
+                      style: const TextStyle(fontSize: 15),
+                    ),
                     RawAutocomplete<String>(
                         focusNode: focusNode,
                         textEditingController: controller,
@@ -64,7 +76,7 @@ class _AutoCompleteSearchState extends State<AutoCompleteSearch> {
 
                           return matchingDrugs
                               .map((drug) =>
-                                  '${drug['name']} --${drug['generalPrice']}--${drug['hospitalPrice']}--${drug['pharmaPrice']}-- ${drug['pack']} --${drug['sci']} --${drug['barCode']} --${drug['uses']} --${drug['side_effects']}')
+                                  '${drug['name']} --${drug['generalPrice']}--${drug['hospitalPrice']}--${drug['pharmaPrice']}-- ${drug['pack']} --${drug['sci']} --${drug['barCode']} -- ${hello == 'ar' ? drug['usesArabic'] : drug['uses']} --${hello == 'ar' ? drug['effectsArabic'] : drug['side_effects']}')
                               .toList();
                         },
                         fieldViewBuilder: (
@@ -125,8 +137,10 @@ class _AutoCompleteSearchState extends State<AutoCompleteSearch> {
                                                                 sci: sci,
                                                                 barcode:
                                                                     barcode,
-                                                                    sideEffects: sidee,
-                                                                    uses: uses,
+                                                                sideEffects:
+                                                                    sidee,
+                                                                uses: uses,
+                                                                lang:hello,
                                                               )));
                                                 },
                                                 child: ListTile(

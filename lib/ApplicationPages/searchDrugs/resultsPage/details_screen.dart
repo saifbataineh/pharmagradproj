@@ -18,7 +18,8 @@ class DetailsPage extends StatelessWidget {
       this.price3 = "have no available price ",
       this.pack = "",
       this.uses = "",
-      this.sideEffects = ""});
+      this.sideEffects = "",
+      this.lang});
   final String name;
   final String barcode;
   final String sci;
@@ -28,6 +29,8 @@ class DetailsPage extends StatelessWidget {
   final String pack;
   final String uses;
   final String sideEffects;
+  final String? lang;
+  
   Future<String> getImageURL() async {
     final reference =
         FirebaseStorage.instance.ref().child('${name.trim()}.png');
@@ -57,18 +60,19 @@ class DetailsPage extends StatelessWidget {
             title: Text(name),
             actions: [
               Padding(
-                          padding: const EdgeInsets.only(right: 0.5),
-                          child: IconButton(onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(builder: (cxt) =>
-                              LocateDrugPage(searchedDrug: name))
-                            );
-                          }, 
-                          icon: const Icon(Icons.location_on))),
+                  padding: const EdgeInsets.only(right: 0.5),
+                  child: IconButton(
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (cxt) =>
+                                LocateDrugPage(searchedDrug: name)));
+                      },
+                      icon: const Icon(Icons.location_on))),
             ],
           ),
           floatingActionButton: DraggableFAB(
-              text: "uses are $uses and the side effects are $sideEffects"),
+            lang: lang,
+              text: lang =='en'?"uses are $uses and the side effects are $sideEffects":'الاستخدامات هي $uses والاعراض الجانبية هي $sideEffects'),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -77,6 +81,7 @@ class DetailsPage extends StatelessWidget {
                   margin: const EdgeInsets.all(10),
                   child: SingleChildScrollView(
                     child: Column(
+                      
                       children: [
                         SizedBox(
                             height: 200,
@@ -106,7 +111,7 @@ class DetailsPage extends StatelessWidget {
                           child: ListTile(
                             iconColor: Colors.deepPurpleAccent,
                             leading: const Icon(Icons.account_circle),
-                            title:  Text(S.of(context).uses),
+                            title: Text(S.of(context).uses),
                             subtitle: Text(uses.trim()),
                           ),
                         ),
@@ -126,44 +131,48 @@ class DetailsPage extends StatelessWidget {
                         ListTile(
                           iconColor: Colors.deepPurpleAccent,
                           leading: const Icon(Icons.attach_money_outlined),
-                          title:  Text(S.of(context).jor_price),
+                          title: Text(S.of(context).jor_price),
                           subtitle: Text("$price1 jod"),
                         ),
                         ListTile(
                           iconColor: Colors.deepPurpleAccent,
                           leading: const Icon(Icons.account_balance),
-                          title:  Text(S.of(context).hos_price),
+                          title: Text(S.of(context).hos_price),
                           subtitle: Text("$price2 jod"),
                         ),
                         ListTile(
                           iconColor: Colors.deepPurpleAccent,
                           leading: const Icon(Icons.attach_money_outlined),
-                          title:  Text(S.of(context).ph_price),
+                          title: Text(S.of(context).ph_price),
                           subtitle: Text("$price3 jod"),
                         ),
                         ListTile(
                           iconColor: Colors.deepPurpleAccent,
                           leading: const Icon(Icons.numbers),
-                          title:  Text(S.of(context).packing),
+                          title: Text(S.of(context).packing),
                           subtitle: Text(pack),
                         ),
                         ListTile(
                           iconColor: Colors.deepPurpleAccent,
                           leading: const Icon(Icons.science),
-                          title:  Text(S.of(context).generic_name),
+                          title: Text(S.of(context).generic_name),
                           subtitle: Text(sci),
                         ),
                         ListTile(
                           iconColor: Colors.deepPurpleAccent,
                           leading: const Icon(Icons.barcode_reader),
-                          title:  Text(S.of(context).barcoden),
+                          title: Text(S.of(context).barcoden),
                           subtitle: Text(barcode),
                         ),
-
+                        Text(S.of(context).alter,style: const TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),
                         Container(
                           height: 150,
+                          padding: const EdgeInsets.all(10),
                           width: double.infinity,
-                         decoration: BoxDecoration(border: Border.all()),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(35),
+                            border: Border.all(
+                                  width: 2, color: Colors.deepPurpleAccent),),
                           child: ListView.separated(
                               separatorBuilder: (context, _) => const SizedBox(
                                     width: 20,
@@ -191,8 +200,9 @@ class DetailsPage extends StatelessWidget {
                                     matchingDrugs[index]['pharmaPrice'];
                                 final barcode = matchingDrugs[index]['barCode'];
                                 final sci = matchingDrugs[index]['sci'];
-                                final uses = matchingDrugs[index]['uses'];
-                                final sideEffects = matchingDrugs[index]['side_effects'];
+                                final uses =lang=='ar'?matchingDrugs[index]['usesArabic']: matchingDrugs[index]['uses'];
+                                final sideEffects =lang=='ar'?matchingDrugs[index]['effectsArabic']:
+                                    matchingDrugs[index]['side_effects'];
                                 return GestureDetector(
                                   onTap: () => Navigator.of(context)
                                       .push(MaterialPageRoute(

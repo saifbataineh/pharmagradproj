@@ -6,8 +6,9 @@ import 'package:provider/provider.dart';
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
 
 class ResultScreen extends StatelessWidget {
-  const ResultScreen({super.key, required this.text});
+   ResultScreen({super.key, required this.text,this.lang});
   final String text;
+  final String? lang;
 
   @override
   Widget build(BuildContext context) {
@@ -23,18 +24,20 @@ class ResultScreen extends StatelessWidget {
 
       final drugsData = provider.map['drugs'] as List<dynamic>;
       final matchingDrugs = drugsData.where((drug) {
-        final drugNameLower = drug['name'].toLowerCase(). toString().split(" ").first;
+        final drugNameLower =
+            drug['name'].toLowerCase().toString().split(" ").first;
         final textLower = text.toLowerCase();
 
         return partialRatio(drugNameLower, textLower) == 100;
       }).toList()
-      ..sort((drug1, drug2) => partialRatio(drug2['name'].toLowerCase(), text.toLowerCase())
-        .compareTo(partialRatio(drug1['name'].toLowerCase(), text.toLowerCase())));
-      
+        ..sort((drug1, drug2) => partialRatio(
+                drug2['name'].toLowerCase(), text.toLowerCase())
+            .compareTo(
+                partialRatio(drug1['name'].toLowerCase(), text.toLowerCase())));
 
       return Scaffold(
         appBar: AppBar(
-          title:  Text(S.of(context).Result),
+          title: Text(S.of(context).Result),
         ),
         body: ListView.builder(
           itemCount: matchingDrugs.length,
@@ -46,8 +49,8 @@ class ResultScreen extends StatelessWidget {
             final hospitalPrice = matchingDrugs[index]['hospitalPrice'];
             final phPrice = matchingDrugs[index]['pharmaPrice'];
             final barcode = matchingDrugs[index]['barCode'];
-            final uses = matchingDrugs[index]['uses'];
-            final sideEffects = matchingDrugs[index]['side_effects'];
+            final uses = lang=='ar'?matchingDrugs[index]['usesArabic']: matchingDrugs[index]['uses'];
+            final sideEffects = lang=='ar'?matchingDrugs[index]['effectsArabic']: matchingDrugs[index]['side_effects'];
 
             return ListTile(
               onTap: () {
