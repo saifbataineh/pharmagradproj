@@ -7,7 +7,7 @@ import 'package:grad_test_1/generated/l10n.dart';
 
 class PopRestrict extends StatefulWidget {
   const PopRestrict({super.key,this.currentLocale,this.onLanguageChange});
-    final Function(Locale)? onLanguageChange;
+    final void Function(Locale, String)? onLanguageChange;
   final Locale? currentLocale;
 
   @override

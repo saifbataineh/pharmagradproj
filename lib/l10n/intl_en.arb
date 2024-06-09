@@ -85,12 +85,14 @@
     "Loading":" Loading...",
 
 
-    "records-value": "value",
-    "records-text": "Your Record Type",
-    "records-diabetes": "Diabetes", 
-    "records-pressure": "Pressure",
-    "records-save": "Save",
-    "records-cancel": "Cancel",
+    
+    "recordsText": "Your Record Type",
+    "recordsDiabetes": "Diabetes", 
+    "recordsPressure": "Pressure",
+    "recordsSave": "Save",
+    "recordscancel": "Cancel",
+    "Noyet":"No records is set yet",
+    "sche":"date:",
     
 
     "pharmaOpen": "Open Now", 
@@ -104,5 +106,17 @@
     "locationServ":"Location Service Disabled.",
     "locationden":"Location Access Denied.",
     "nointcon":"No Internet Connection, Check your internet connection. ",
-    "alter":"alternatives"
+    "alter":"alternatives",
+    "pillsPerDose":"quantity per dose",
+    "pillsPerDoseH":"Example: 2 pills or 50 mg in numbers only ",
+    "remind": "Time to take your medicine",
+    "remind2": "don't forget your medicine",
+    "Done": "I took it",
+    "snooze":" snooze for 5 mins",
+    "pleaseenter":" please Enter the record",
+    "hintR":"enter your record ",
+    "waterR":"Water Reminder",
+    "waterTitle":"don't forget to drink some water",
+    "waterSet":"water Reminder has been set"
+
 }

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:grad_test_1/generated/l10n.dart';
 
 class Records extends StatefulWidget {
   const Records({super.key});
@@ -17,6 +18,7 @@ class _RecordsState extends State<Records> {
   String? drug = "Diabetes";
   @override
   void initState() {
+    
     super.initState();
 
     if (_currentUserEmail != null) {
@@ -48,26 +50,26 @@ class _RecordsState extends State<Records> {
                           child: TextFormField(
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return "please enter a value";
+                                return S.of(context).pleaseenter;
                               }
                               return null;
                             },
                             controller: _value,
                             keyboardType:
                                 const TextInputType.numberWithOptions(),
-                            decoration: const InputDecoration(
+                            decoration:  InputDecoration(
                               filled: true,
-                              fillColor: Color.fromARGB(40, 124, 77, 255),
-                              border: OutlineInputBorder(
+                              fillColor: const Color.fromARGB(40, 124, 77, 255),
+                              border: const OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(30))),
-                              hintText: 'value',
-                              labelText: 'value',
-                              contentPadding: EdgeInsets.all(6),
+                              hintText: S.of(context).hintR,
+                              labelText: S.of(context).hintR,
+                              contentPadding: const EdgeInsets.all(6),
                             ),
                           ),
                         ),
-                        const Text("your record type"),
+                         Text(S.of(context).recordsText),
                         const SizedBox(
                           height: 30,
                         ),
@@ -78,7 +80,7 @@ class _RecordsState extends State<Records> {
                               margin: const EdgeInsets.all(20),
                               child: Column(
                                 children: [
-                                  const Text("Diabetes",),
+                                   Text(S.of(context).recordsDiabetes,),
                                   Radio(
                                       value: "Diabetes",
                                       groupValue: drug,
@@ -92,7 +94,7 @@ class _RecordsState extends State<Records> {
                             ),
                             Column(
                               children: [
-                                const Text("pressure"),
+                                 Text(S.of(context).recordsPressure),
                                 Radio(
                                     value: "pressure",
                                     groupValue: drug,
@@ -132,7 +134,7 @@ class _RecordsState extends State<Records> {
 
                                 // Ensure alarm triggers even in doze mode
                               }
-                }, child: const Text("save"))
+                }, child:  Text(S.of(context).recordsSave))
               ],
             ),
           );
@@ -142,10 +144,10 @@ class _RecordsState extends State<Records> {
           stream: _usersStream,
           builder: (context, snapshot) {
             if (snapshot.hasError) {
-              return const Text('Something went wrong');
+              return  Text(S.of(context).errorText);
             }
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Text("Loading");
+              return  Text(S.of(context).Loading);
             }
             late final Map<String, dynamic> userData;
             try {
@@ -155,8 +157,8 @@ class _RecordsState extends State<Records> {
             }
 
             return userData.isEmpty
-                ? const Center(
-                    child: Text("No records is set yet"),
+                ?  Center(
+                    child: Text(S.of(context).Noyet),
                   )
                 : ListView.builder(
                     itemCount: userData.length,
@@ -165,7 +167,7 @@ class _RecordsState extends State<Records> {
                       final mapValue = userData[mapKey] as Map<String, dynamic>;
                       return Card(
                         child: ListTile(
-                          subtitle: Text("date time: ${mapValue["time"].toDate()}"),
+                          subtitle: Text("${S.of(context).sche} ${mapValue["time"].toDate()}"),
                           trailing: Text(
                             " ${mapValue["value"]}",
                             textAlign: TextAlign.center,

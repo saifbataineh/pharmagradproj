@@ -205,7 +205,7 @@ class DetailsPage extends StatelessWidget {
                                     matchingDrugs[index]['side_effects'];
                                 return GestureDetector(
                                   onTap: () => Navigator.of(context)
-                                      .push(MaterialPageRoute(
+                                      .pushReplacement(MaterialPageRoute(
                                           builder: (ctx) => DetailsPage(
                                                 barcode: barcode,
                                                 sci: sci,

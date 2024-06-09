@@ -5,8 +5,8 @@ import 'package:grad_test_1/ApplicationPages/searchDrugs/recognitions/text_voice
 import 'package:grad_test_1/generated/l10n.dart';
 
 class FeatureSelector extends StatelessWidget {
-   FeatureSelector({super.key,this.lang});
-  String? lang;
+   const FeatureSelector({super.key,this.lang});
+   final String? lang;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +33,7 @@ class FeatureSelector extends StatelessWidget {
       Card(
         borderOnForeground: true,
         child: ListTile(
+            splashColor: Colors.deepOrange,
             title: Text(S.of(context).cameraSearch),
             leading: const Icon(Icons.add_a_photo),
             onTap: () {
@@ -43,6 +44,7 @@ class FeatureSelector extends StatelessWidget {
       Card(
           borderOnForeground: true,
           child: ListTile(
+              splashColor: Colors.deepOrange,
               title: Text(S.of(context).barcodeSearch),
               onTap: () {
                 Navigator.of(context).push(

@@ -81,14 +81,16 @@
     "alarmCancel": "الغاء",
 
 
-    "records-value": "القيمة",
-    "records-text": "نوع السجل",
-    "records-diabetes": "مرض السكري", 
-    "records-pressure": "ضغط الدم",
-    "records-save": "حفظ",
-    "records-cancel": "الغاء",
+   
+    "recordsText": "نوع السجل",
+    "recordsDiabetes": "مرض السكري", 
+    "recordsPressure": "ضغط الدم",
+    "recordsSave": "حفظ",
+    "recordsCancel": "الغاء",
     "errorText":"حدث خطأ ما",
     "Loading":"جاري التحميل",
+    "Noyet":"لا تسجيلات متاحة بعد",
+    "sche":"التاريخ",
     
 
     "pharmaOpen": "متاح حاليا", 
@@ -102,5 +104,17 @@
     "locationServ":"خدمة تحديد الموقع معطلة",
     "locationden":"الوصول الى خدمة المواقع معطل.",
     "nointcon":"لا يوجد لديك اتصال بالانترنت الرجاء ، الرجاء التأكد من الاتصال ",
-    "alter":"البدائل"
+    "alter":"البدائل",
+    "pillsPerDose":"كمية الجرعة",
+    "pillsPerDoseH":"  مثال :  حبتين او خمسون ملغ  بالارقام فقط ",
+    "remind": "وقت اخذ الدواء ", 
+    "remind2": "لا تنسى دوائك " ,
+    "Done": "لقد اخذت الدواء " ,
+    "snooze":" غفوة لمدة خمس دقائق",
+    "pleaseenter":" الرجاء ادخال  القياس",
+    "hintR":" ادخل القياس ",
+    "waterR":"منبه ماء ",
+    "waterTitle":"لا تنسى ان تشرب الماء  ",
+    "waterSet":"تم تشغيل تذكير المياه "
+
 }

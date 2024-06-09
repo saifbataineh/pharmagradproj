@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:grad_test_1/generated/l10n.dart';
 import 'package:grad_test_1/sign-in-up-page/sign_in_up.dart';
 import 'package:intl/intl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 
 class WelcomePage extends StatefulWidget {
   final Locale? currentLocale;
-  final Function(Locale)? onLanguageChange;
+  final  Function(Locale, String)? onLanguageChange;
   const WelcomePage({super.key, this.currentLocale, this.onLanguageChange});
 
   @override
@@ -68,7 +68,7 @@ class _WelcomePageState extends State<WelcomePage> {
               ? ElevatedButton(
                   onPressed: () {
 
-                    widget.onLanguageChange!(Locale('en'));
+                    widget.onLanguageChange!(const Locale('en'),"en");
                     setState(() {});
                   },
                   child: Text(S.of(context).lagn),
@@ -76,7 +76,7 @@ class _WelcomePageState extends State<WelcomePage> {
               : // Add spacing between buttons
               ElevatedButton(
                   onPressed: () {
-                   widget.onLanguageChange!(Locale('ar'));
+                   widget.onLanguageChange!(const Locale('ar'),"ar");
                     setState(() {});
                   },
                   child: Text(S

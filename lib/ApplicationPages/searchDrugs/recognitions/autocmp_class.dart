@@ -4,31 +4,15 @@ import 'package:grad_test_1/ApplicationPages/searchDrugs/resultsPage/details_scr
 import 'package:grad_test_1/Providers/listen_provider.dart';
 import 'package:grad_test_1/generated/l10n.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:intl/intl.dart';
 
-class AutoCompleteSearch extends StatefulWidget {
-  const AutoCompleteSearch({super.key});
 
-  @override
-  State<AutoCompleteSearch> createState() => _AutoCompleteSearchState();
-}
+class AutoCompleteSearch extends StatelessWidget {
+   AutoCompleteSearch({super.key});
 
-class _AutoCompleteSearchState extends State<AutoCompleteSearch> {
   final controller = TextEditingController();
-  FocusNode focusNode = FocusNode();
-  
-  String? hello;
-  @override
-  void initState() {
-    checkinit();
-    super.initState();
-  }
 
-  checkinit() async {
-    final _prefs = await SharedPreferences.getInstance();
-    hello = _prefs.getString("language_code");
-    print("hello is $hello");
-  }
+  final FocusNode focusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +60,7 @@ class _AutoCompleteSearchState extends State<AutoCompleteSearch> {
 
                           return matchingDrugs
                               .map((drug) =>
-                                  '${drug['name']} --${drug['generalPrice']}--${drug['hospitalPrice']}--${drug['pharmaPrice']}-- ${drug['pack']} --${drug['sci']} --${drug['barCode']} -- ${hello == 'ar' ? drug['usesArabic'] : drug['uses']} --${hello == 'ar' ? drug['effectsArabic'] : drug['side_effects']}')
+                                  '${drug['name']} --${drug['generalPrice']}--${drug['hospitalPrice']}--${drug['pharmaPrice']}-- ${drug['pack']} --${drug['sci']} --${drug['barCode']} -- ${Intl.getCurrentLocale()=='ar' ? drug['usesArabic'] : drug['uses']} --${Intl.getCurrentLocale()=='ar' ? drug['effectsArabic'] : drug['side_effects']}')
                               .toList();
                         },
                         fieldViewBuilder: (
@@ -140,7 +124,7 @@ class _AutoCompleteSearchState extends State<AutoCompleteSearch> {
                                                                 sideEffects:
                                                                     sidee,
                                                                 uses: uses,
-                                                                lang:hello,
+                                                                
                                                               )));
                                                 },
                                                 child: ListTile(

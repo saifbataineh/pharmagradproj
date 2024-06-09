@@ -760,17 +760,75 @@ class S {
     );
   }
 
-  // skipped getter for the 'records-value' key
+  /// `Your Record Type`
+  String get recordsText {
+    return Intl.message(
+      'Your Record Type',
+      name: 'recordsText',
+      desc: '',
+      args: [],
+    );
+  }
 
-  // skipped getter for the 'records-text' key
+  /// `Diabetes`
+  String get recordsDiabetes {
+    return Intl.message(
+      'Diabetes',
+      name: 'recordsDiabetes',
+      desc: '',
+      args: [],
+    );
+  }
 
-  // skipped getter for the 'records-diabetes' key
+  /// `Pressure`
+  String get recordsPressure {
+    return Intl.message(
+      'Pressure',
+      name: 'recordsPressure',
+      desc: '',
+      args: [],
+    );
+  }
 
-  // skipped getter for the 'records-pressure' key
+  /// `Save`
+  String get recordsSave {
+    return Intl.message(
+      'Save',
+      name: 'recordsSave',
+      desc: '',
+      args: [],
+    );
+  }
 
-  // skipped getter for the 'records-save' key
+  /// `Cancel`
+  String get recordscancel {
+    return Intl.message(
+      'Cancel',
+      name: 'recordscancel',
+      desc: '',
+      args: [],
+    );
+  }
 
-  // skipped getter for the 'records-cancel' key
+  /// `No records is set yet`
+  String get Noyet {
+    return Intl.message(
+      'No records is set yet',
+      name: 'Noyet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `date:`
+  String get sche {
+    return Intl.message(
+      'date:',
+      name: 'sche',
+      desc: '',
+      args: [],
+    );
+  }
 
   /// `Open Now`
   String get pharmaOpen {
@@ -887,6 +945,116 @@ class S {
     return Intl.message(
       'alternatives',
       name: 'alter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `quantity per dose`
+  String get pillsPerDose {
+    return Intl.message(
+      'quantity per dose',
+      name: 'pillsPerDose',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Example: 2 pills or 50 mg in numbers only `
+  String get pillsPerDoseH {
+    return Intl.message(
+      'Example: 2 pills or 50 mg in numbers only ',
+      name: 'pillsPerDoseH',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Time to take your medicine`
+  String get remind {
+    return Intl.message(
+      'Time to take your medicine',
+      name: 'remind',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `don't forget your medicine`
+  String get remind2 {
+    return Intl.message(
+      'don\'t forget your medicine',
+      name: 'remind2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I took it`
+  String get Done {
+    return Intl.message(
+      'I took it',
+      name: 'Done',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` snooze for 5 mins`
+  String get snooze {
+    return Intl.message(
+      ' snooze for 5 mins',
+      name: 'snooze',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` please Enter the record`
+  String get pleaseenter {
+    return Intl.message(
+      ' please Enter the record',
+      name: 'pleaseenter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `enter your record `
+  String get hintR {
+    return Intl.message(
+      'enter your record ',
+      name: 'hintR',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Water Reminder`
+  String get waterR {
+    return Intl.message(
+      'Water Reminder',
+      name: 'waterR',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `don't forget to drink some water`
+  String get waterTitle {
+    return Intl.message(
+      'don\'t forget to drink some water',
+      name: 'waterTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `water Reminder has been set`
+  String get waterSet {
+    return Intl.message(
+      'water Reminder has been set',
+      name: 'waterSet',
       desc: '',
       args: [],
     );

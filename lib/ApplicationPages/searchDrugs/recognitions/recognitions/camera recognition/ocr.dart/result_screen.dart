@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
 
 class ResultScreen extends StatelessWidget {
-   ResultScreen({super.key, required this.text,this.lang});
+   const ResultScreen({super.key, required this.text,this.lang});
   final String text;
   final String? lang;
 

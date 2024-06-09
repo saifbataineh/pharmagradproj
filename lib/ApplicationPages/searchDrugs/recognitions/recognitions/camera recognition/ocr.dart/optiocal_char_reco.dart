@@ -8,8 +8,8 @@ import 'package:grad_test_1/generated/l10n.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class OpitcalChar extends StatefulWidget {
-   OpitcalChar({super.key, this.lang});
-  String? lang;
+   const OpitcalChar({super.key, this.lang});
+  final String? lang;
 
   @override
   State<OpitcalChar> createState() => _OpitcalCharState();

@@ -22,9 +22,11 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "Done": MessageLookupByLibrary.simpleMessage("لقد اخذت الدواء "),
         "Loading": MessageLookupByLibrary.simpleMessage("جاري التحميل"),
         "NobarCode": MessageLookupByLibrary.simpleMessage(
             "لا يوجد دواء بهاذا الرقم الرجاء المحاولة من جديد"),
+        "Noyet": MessageLookupByLibrary.simpleMessage("لا تسجيلات متاحة بعد"),
         "Result": MessageLookupByLibrary.simpleMessage("نتيجة البحث"),
         "Return": MessageLookupByLibrary.simpleMessage("رجوع"),
         "SideEffects": MessageLookupByLibrary.simpleMessage("الأعراض الجانبية"),
@@ -88,6 +90,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "الرجاء التأكد من كلمة السر او البريد الالكتروني"),
         "errorText": MessageLookupByLibrary.simpleMessage("حدث خطأ ما"),
         "generic_name": MessageLookupByLibrary.simpleMessage("الاسم العلمي"),
+        "hintR": MessageLookupByLibrary.simpleMessage(" ادخل القياس "),
         "hos_price": MessageLookupByLibrary.simpleMessage("سعر المستشفى"),
         "jor_price":
             MessageLookupByLibrary.simpleMessage("سعر الجمهور الأردني"),
@@ -114,22 +117,40 @@ class MessageLookup extends MessageLookupByLibrary {
         "pharmaClosed": MessageLookupByLibrary.simpleMessage("مغلق"),
         "pharmaOpen": MessageLookupByLibrary.simpleMessage("متاح حاليا"),
         "pharmaTails": MessageLookupByLibrary.simpleMessage("فارما تيلز"),
+        "pillsPerDose": MessageLookupByLibrary.simpleMessage("كمية الجرعة"),
+        "pillsPerDoseH": MessageLookupByLibrary.simpleMessage(
+            "  مثال :  حبتين او خمسون ملغ  بالارقام فقط "),
+        "pleaseenter":
+            MessageLookupByLibrary.simpleMessage(" الرجاء ادخال  القياس"),
         "plspass": MessageLookupByLibrary.simpleMessage(
             "ادخل كلمة سر مكونة من 5 احرف على الاقل "),
         "plspress": MessageLookupByLibrary.simpleMessage(
             "* اذا كنت لا ترى الاقتراحات\nرجاءا اضغط على صندوق البحث"),
         "records": MessageLookupByLibrary.simpleMessage("سجلاتك"),
+        "recordsDiabetes": MessageLookupByLibrary.simpleMessage("مرض السكري"),
+        "recordsPressure": MessageLookupByLibrary.simpleMessage("ضغط الدم"),
+        "recordsSave": MessageLookupByLibrary.simpleMessage("حفظ"),
+        "recordsText": MessageLookupByLibrary.simpleMessage("نوع السجل"),
+        "remind": MessageLookupByLibrary.simpleMessage("وقت اخذ الدواء "),
+        "remind2": MessageLookupByLibrary.simpleMessage("لا تنسى دوائك "),
+        "sche": MessageLookupByLibrary.simpleMessage("التاريخ"),
         "searchDrug": MessageLookupByLibrary.simpleMessage("البحث عن الدواء"),
         "searchInput": MessageLookupByLibrary.simpleMessage("ادخل اسم الدواء:"),
         "searchVoice":
             MessageLookupByLibrary.simpleMessage("استمر بالضغط اثناء الحديث"),
         "shortName": MessageLookupByLibrary.simpleMessage(
             "الاسم يجب ان يكون 4 احرف على الاقل"),
+        "snooze": MessageLookupByLibrary.simpleMessage(" غفوة لمدة خمس دقائق"),
         "suc": MessageLookupByLibrary.simpleMessage("تمت العملية بنجاح "),
         "textSearch": MessageLookupByLibrary.simpleMessage(
             "البحث عن الدواء باستخدام الاسم او الصوت"),
         "titleCamera": MessageLookupByLibrary.simpleMessage("صور علبة الدواء"),
         "uses": MessageLookupByLibrary.simpleMessage(":الاستخدامات"),
+        "waterR": MessageLookupByLibrary.simpleMessage("منبه ماء "),
+        "waterSet":
+            MessageLookupByLibrary.simpleMessage("تم تشغيل تذكير المياه "),
+        "waterTitle":
+            MessageLookupByLibrary.simpleMessage("لا تنسى ان تشرب الماء  "),
         "weakPass": MessageLookupByLibrary.simpleMessage("كلمة السر ضعيفة"),
         "wtl": MessageLookupByLibrary.simpleMessage("أتريد مغادرة"),
         "yourLcoation": MessageLookupByLibrary.simpleMessage("موقعك"),

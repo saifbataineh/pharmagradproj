@@ -22,9 +22,11 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "Done": MessageLookupByLibrary.simpleMessage("I took it"),
         "Loading": MessageLookupByLibrary.simpleMessage(" Loading..."),
         "NobarCode": MessageLookupByLibrary.simpleMessage(
             "No Bar Code Were Found, Please Try Again."),
+        "Noyet": MessageLookupByLibrary.simpleMessage("No records is set yet"),
         "Result": MessageLookupByLibrary.simpleMessage("Result"),
         "Return": MessageLookupByLibrary.simpleMessage(" Return"),
         "SideEffects": MessageLookupByLibrary.simpleMessage("SideEffects"),
@@ -90,6 +92,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "errorText":
             MessageLookupByLibrary.simpleMessage(" Something went wrong"),
         "generic_name": MessageLookupByLibrary.simpleMessage("Generic Name"),
+        "hintR": MessageLookupByLibrary.simpleMessage("enter your record "),
         "hos_price": MessageLookupByLibrary.simpleMessage("Hospital price"),
         "jor_price":
             MessageLookupByLibrary.simpleMessage("Jordanian public price"),
@@ -118,11 +121,27 @@ class MessageLookup extends MessageLookupByLibrary {
         "pharmaClosed": MessageLookupByLibrary.simpleMessage("Closed"),
         "pharmaOpen": MessageLookupByLibrary.simpleMessage("Open Now"),
         "pharmaTails": MessageLookupByLibrary.simpleMessage("Pharma Tails"),
+        "pillsPerDose":
+            MessageLookupByLibrary.simpleMessage("quantity per dose"),
+        "pillsPerDoseH": MessageLookupByLibrary.simpleMessage(
+            "Example: 2 pills or 50 mg in numbers only "),
+        "pleaseenter":
+            MessageLookupByLibrary.simpleMessage(" please Enter the record"),
         "plspass": MessageLookupByLibrary.simpleMessage(
             "enter password that at least 5 charachters"),
         "plspress": MessageLookupByLibrary.simpleMessage(
             "* if you don\'t see the suggetions\n please tap on the text form"),
         "records": MessageLookupByLibrary.simpleMessage(" Records"),
+        "recordsDiabetes": MessageLookupByLibrary.simpleMessage("Diabetes"),
+        "recordsPressure": MessageLookupByLibrary.simpleMessage("Pressure"),
+        "recordsSave": MessageLookupByLibrary.simpleMessage("Save"),
+        "recordsText": MessageLookupByLibrary.simpleMessage("Your Record Type"),
+        "recordscancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "remind":
+            MessageLookupByLibrary.simpleMessage("Time to take your medicine"),
+        "remind2":
+            MessageLookupByLibrary.simpleMessage("don\'t forget your medicine"),
+        "sche": MessageLookupByLibrary.simpleMessage("date:"),
         "searchDrug":
             MessageLookupByLibrary.simpleMessage("Search For Your Drug"),
         "searchInput": MessageLookupByLibrary.simpleMessage("Enter Drug Name:"),
@@ -130,12 +149,18 @@ class MessageLookup extends MessageLookupByLibrary {
             "hold the button and start speaking"),
         "shortName": MessageLookupByLibrary.simpleMessage(
             "your name must be 4 charachters at least"),
+        "snooze": MessageLookupByLibrary.simpleMessage(" snooze for 5 mins"),
         "suc": MessageLookupByLibrary.simpleMessage("success"),
         "textSearch": MessageLookupByLibrary.simpleMessage(
             "Search For Drug Via Voice or Text"),
         "titleCamera": MessageLookupByLibrary.simpleMessage(
             "take photo of the drug package"),
         "uses": MessageLookupByLibrary.simpleMessage("uses:"),
+        "waterR": MessageLookupByLibrary.simpleMessage("Water Reminder"),
+        "waterSet":
+            MessageLookupByLibrary.simpleMessage("water Reminder has been set"),
+        "waterTitle": MessageLookupByLibrary.simpleMessage(
+            "don\'t forget to drink some water"),
         "weakPass": MessageLookupByLibrary.simpleMessage("weak Password"),
         "wtl": MessageLookupByLibrary.simpleMessage("you want to leave "),
         "yourLcoation": MessageLookupByLibrary.simpleMessage("Your location"),

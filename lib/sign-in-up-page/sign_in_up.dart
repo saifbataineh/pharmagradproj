@@ -8,7 +8,7 @@ import 'package:grad_test_1/sign-in-up-page/authScreen/auth_service.dart';
 class SignUp extends StatefulWidget {
   const SignUp({super.key, this.currentLocale,this.onLanguageChange});
   final Locale? currentLocale;
-  final Function(Locale)? onLanguageChange;
+  final  Function(Locale, String)? onLanguageChange;
   @override
   State<StatefulWidget> createState() {
     return _SignUpState();
@@ -33,7 +33,7 @@ class _SignUpState extends State<SignUp> {
       appBar: AppBar(
         title: Text(
           S.of(context).SignUpPage,
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
       ),
       body: SingleChildScrollView(
@@ -189,7 +189,7 @@ class _SignUpState extends State<SignUp> {
 
 class SignInForm extends StatefulWidget {
   final Locale? currentLocale;
-  final Function(Locale)? onLanguageChange;
+  final void Function(Locale, String)? onLanguageChange;
   const SignInForm({super.key , this.currentLocale, this.onLanguageChange});
 
   @override

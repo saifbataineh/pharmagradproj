@@ -11,6 +11,7 @@ import 'package:grad_test_1/sign-in-up-page/welcome_page.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -37,34 +38,35 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late String? locale;
+  late final SharedPreferences prefs;
   Locale localel = const Locale("en");
- 
+
   @override
   void initState() {
-    
     setPrefs();
 
-    
     super.initState();
   }
 
   void setPrefs() async {
-    final prefs = await SharedPreferences.getInstance();
+    prefs = await SharedPreferences.getInstance();
     locale = prefs.getString("language_code");
-    
+
     if (locale != null) {
-      
-      setLocale(Locale(locale!));
-    } 
-    
+      setLocale(Locale(locale!),locale!);
+      setState(() {});
+    }
   }
 
   // Initial locale
 
   // Function to set and update locale (replace with your implementation)
-  void setLocale(Locale locale) {
+  void setLocale(Locale localell,String lang) {
     setState(() {
-      localel = locale;
+      localel = localell;
+      
+
+      prefs.setString("language_code", lang );
     });
   }
 
@@ -90,12 +92,15 @@ class _MyAppState extends State<MyApp> {
                 iconTheme: IconThemeData(color: Colors.white)),
             textButtonTheme: const TextButtonThemeData(
                 style: ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(
+                    backgroundColor: WidgetStatePropertyAll(
                         Color.fromARGB(69, 124, 77, 255)))),
             primaryColor: Colors.white,
             scaffoldBackgroundColor: const Color.fromARGB(255, 51, 51, 51)),
         home: FirebaseAuth.instance.currentUser == null
             ? WelcomePage(currentLocale: localel, onLanguageChange: setLocale)
-            :  PopRestrict(currentLocale: localel,onLanguageChange: setLocale,));
+            : PopRestrict(
+                currentLocale: localel,
+                onLanguageChange: setLocale,
+              ));
   }
 }

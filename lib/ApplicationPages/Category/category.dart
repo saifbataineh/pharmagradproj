@@ -12,7 +12,7 @@ import 'package:intl/intl.dart';
 class CategorySelector extends StatefulWidget {
   const CategorySelector(
       {super.key, this.onLanguageChange, this.currentLocale});
-  final Function(Locale)? onLanguageChange;
+  final void Function(Locale, String)? onLanguageChange;
   final Locale? currentLocale;
 
   @override
@@ -65,17 +65,18 @@ class _CategorySelectorState extends State<CategorySelector> {
                 Intl.getCurrentLocale() == 'ar'
                     ? GestureDetector(
                         onTap: () {
-                          widget.onLanguageChange!(Locale('en'));
+                          widget.onLanguageChange!(const Locale('en'),"en");
+                          
                           setState(() {});
                         },
                         child: Center(
                             child: Container(
-                                margin: EdgeInsets.only(right: 8),
+                                margin: const EdgeInsets.only(right: 8),
                                 child: Text(S.of(context).lagn))),
                       )
                     : GestureDetector(
                         onTap: () {
-                          widget.onLanguageChange!( Locale('ar'));
+                          widget.onLanguageChange!( const Locale('ar'),"ar");
                           setState(() {});
                         },
                         child: Center(
@@ -85,11 +86,13 @@ class _CategorySelectorState extends State<CategorySelector> {
                       ),
             title: Text(S.of(context).pharmaTails),
             bottom: TabBar(
+
                 physics: const ClampingScrollPhysics(),
                 tabAlignment: TabAlignment.start,
                 isScrollable: true,
                 tabs: [
-                  Tab(
+                  Tab( 
+                    
                     text: texts[0],
                     icon: Icon(icons[0]),
                   ),

@@ -71,8 +71,8 @@ class _MapPageState extends State<MapPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CircularProgressIndicator(color: Color.fromARGB(255, 146, 82, 220)),
-            SizedBox(height: 15),
+            const CircularProgressIndicator(color: Color.fromARGB(255, 146, 82, 220)),
+            const SizedBox(height: 15),
             Text(S.of(context).loading)
           ],
         )) :
